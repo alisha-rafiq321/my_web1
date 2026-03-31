@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JSONTECH — Contact Us | Bahrain</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+    <style>
+      :root {
+        --g: #3b82f6;
+        --g2: #60a5fa;
+        --g3: #1d4ed8;
+        --glow: rgba(59,130,246,0.16);
+        --d1: #07070a;
+        --d2: #0d0d12;
+        --d3: #131319;
+        --d4: #1a1a23;
+        --d5: #21212d;
+        --t1: #edebe5;
+        --t2: #a09e99;
+        --t3: #5e5e6e;
+        --br: rgba(59,130,246,0.13);
+        --brh: rgba(59,130,246,0.4);
+        --r: 14px;
+      }
+      *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+      html{scroll-behavior:smooth}
+      body{font-family:"Plus Jakarta Sans",sans-serif;font-size:15px;line-height:1.65;background:var(--d1);color:var(--t1);overflow-x:hidden;cursor:none}
+      img{display:block;max-width:100%}
+      a{text-decoration:none}
+      ::-webkit-scrollbar{width:3px}
+      ::-webkit-scrollbar-thumb{background:var(--g);border-radius:2px}
+
+      #dot{position:fixed;width:8px;height:8px;background:var(--g);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .1s}
+      #ring{position:fixed;width:30px;height:30px;border:1.5px solid var(--g);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);opacity:.4;transition:left .12s,top .12s,opacity .2s}
+
+      /* ── NAV ── */
+      #nav{position:fixed;top:0;left:0;width:100%;z-index:800;transition:all .35s}
+      #nav .bar{display:flex;align-items:center;max-width:1280px;margin:0 auto;padding:12px 40px;transition:all .35s}
+      #nav.stuck .bar{padding:10px 40px;background:rgba(7,7,10,0.95);backdrop-filter:blur(24px);border-bottom:1px solid var(--br)}
+      .logo{display:flex;align-items:center;gap:12px;flex-shrink:0;margin-right:30px!important}
+      .logo img{height:120px;width:auto;object-fit:contain;transition:all .3s ease}
+      #nav.stuck .logo img{height:90px}
+      .nav-menu{display:flex;align-items:center;gap:2px;margin-left:30px!important}
+      .nav-menu a{font-size:13px;font-weight:500;color:var(--t2);padding:7px 14px;border-radius:7px;letter-spacing:.4px;transition:color .2s,background .2s}
+      .nav-menu a:hover,.nav-menu a.cur{color:var(--g);background:var(--glow)}
+      .nav-btn{margin-left:10px;background:linear-gradient(135deg,var(--g2),var(--g3));color:#fff!important;font-family:"Outfit",sans-serif;font-weight:700;font-size:12.5px;letter-spacing:.3px;padding:9px 22px;border-radius:8px;box-shadow:0 4px 18px rgba(59,130,246,0.28);transition:opacity .2s,transform .2s}
+      .nav-btn:hover{opacity:.85;transform:translateY(-1px)}
+      .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;margin-left:auto;border:none;background:none;padding:4px}
+      .burger span{display:block;width:22px;height:2px;background:var(--g);border-radius:2px;transition:all .28s}
+      .burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+      .burger.open span:nth-child(2){opacity:0}
+      .burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+      .mob-nav{display:none;flex-direction:column;gap:2px;background:var(--d3);border-top:1px solid var(--br);padding:12px 22px 18px}
+      .mob-nav.open{display:flex}
+      .mob-nav a{font-size:15px;font-weight:500;color:var(--t2);padding:10px 12px;border-radius:7px;transition:color .2s,background .2s}
+      .mob-nav a:hover{color:var(--g);background:var(--glow)}
+      .mob-nav .mob-btn{background:linear-gradient(135deg,var(--g2),var(--g3));color:#fff!important;font-family:"Outfit",sans-serif;font-weight:700;text-align:center;margin-top:6px;border-radius:8px}
+      @media(max-width:880px){.nav-menu{display:none}.burger{display:flex}.bar{padding:12px 20px!important}.logo img{height:120px}#nav.stuck .logo img{height:90px}}
+
+      /* ── Full Frame Sections ── */
+      .fsec{min-height:100vh;position:relative;display:flex;flex-direction:column;overflow-x:hidden;overflow-y:visible}
+      .fsec .container{flex:1;display:flex;flex-direction:column;justify-content:center;padding:100px 0 50px}
+
+      /* ═══════════════════════════════════
+         SECTION 1 — HERO + FORM SPLIT
+         FIXED: No more fh-fix, no overflow hidden
+         Content flows naturally, nothing gets cut
+      ═══════════════════════════════════ */
+      #cHero{background:var(--d1);overflow:visible}
+      #cHero::before{content:"";position:absolute;top:-30%;right:-15%;width:700px;height:700px;background:radial-gradient(circle,rgba(59,130,246,0.06) 0%,transparent 65%);border-radius:50%;pointer-events:none}
+
+      /* Tighter top padding for hero so less empty space */
+      #cHero .container{padding-top:90px;padding-bottom:40px}
+
+      .hero-split{display:flex;align-items:stretch;gap:0}
+
+      .hero-left{flex:1;display:flex;flex-direction:column;justify-content:center;padding-right:40px;position:relative;z-index:2}
+
+      .hero-tag{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--g);margin-bottom:12px}
+      .hero-tag::before{content:"";width:18px;height:1.5px;background:var(--g)}
+
+      .hero-heading{font-family:"Outfit",sans-serif;font-size:clamp(30px,4.5vw,52px);font-weight:900;letter-spacing:-2.5px;line-height:1.02;color:var(--t1);margin-bottom:12px}
+      .hero-heading span{color:var(--g)}
+
+      .hero-desc{font-size:14px;color:var(--t2);line-height:1.7;max-width:440px;margin-bottom:24px}
+
+      .hero-channels{display:flex;flex-direction:column;gap:10px}
+      .hch{display:flex;align-items:center;gap:12px}
+      .hch-icon{width:36px;height:36px;border-radius:9px;background:rgba(59,130,246,0.08);border:1px solid var(--br);display:flex;align-items:center;justify-content:center;color:var(--g);font-size:15px;flex-shrink:0;transition:all .25s}
+      .hch:hover .hch-icon{border-color:var(--brh);background:var(--glow)}
+      .hch-label{font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:1px;margin-bottom:1px}
+      .hch-val{font-family:"Outfit",sans-serif;font-size:14px;font-weight:600;color:var(--t1)}
+      .hch-val a{color:var(--t1);transition:color .2s}
+      .hch-val a:hover{color:var(--g)}
+
+      .hero-divider{width:1px;background:linear-gradient(to bottom,transparent,var(--br),var(--br),transparent);margin:0 32px;flex-shrink:0}
+
+      /* ── FORM — compact spacing so nothing gets cut ── */
+      .hero-right{flex:1;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:2}
+
+      .form-card{background:var(--d2);border:1px solid var(--br);border-radius:16px;padding:26px 28px;position:relative;overflow:hidden}
+      .form-card::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--g3),var(--g),var(--g3))}
+      .form-card::after{content:"";position:absolute;top:0;right:0;width:200px;height:200px;background:radial-gradient(circle,rgba(59,130,246,0.04) 0%,transparent 70%);pointer-events:none}
+
+      .form-title{font-family:"Outfit",sans-serif;font-size:18px;font-weight:800;letter-spacing:-.5px;color:var(--t1);margin-bottom:2px}
+      .form-sub{font-size:11.5px;color:var(--t3);margin-bottom:18px}
+
+      .fg{margin-bottom:12px;position:relative}
+      .fg label{display:block;font-size:10px;font-weight:600;letter-spacing:1px;text-transform:uppercase;color:var(--t3);margin-bottom:4px}
+      .fg input,.fg select,.fg textarea{width:100%;background:var(--d3);border:1px solid var(--br);border-radius:8px;padding:9px 12px;font-family:"Plus Jakarta Sans",sans-serif;font-size:13px;color:var(--t1);transition:border-color .25s,box-shadow .25s;outline:none}
+      .fg input::placeholder,.fg textarea::placeholder{color:var(--t3)}
+      .fg input:focus,.fg select:focus,.fg textarea:focus{border-color:var(--g);box-shadow:0 0 0 3px rgba(59,130,246,0.1)}
+      .fg textarea{resize:none;height:64px}
+      .fg select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%235e5e6e' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;cursor:pointer}
+      .fg select option{background:var(--d3);color:var(--t1)}
+
+      .fg-row{display:flex;gap:10px}
+      .fg-row .fg{flex:1}
+
+      .form-submit{width:100%;background:linear-gradient(135deg,var(--g2),var(--g3));color:#fff;font-family:"Outfit",sans-serif;font-weight:700;font-size:13px;letter-spacing:.3px;padding:11px;border-radius:8px;border:none;box-shadow:0 8px 28px rgba(59,130,246,0.26);cursor:pointer;transition:all .3s;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:2px}
+      .form-submit:hover{transform:translateY(-2px);box-shadow:0 14px 38px rgba(59,130,246,0.42)}
+      .form-note{font-size:10.5px;color:var(--t3);text-align:center;margin-top:10px}
+      .form-note i{color:var(--g);margin-right:4px}
+
+      /* ═══════════════════════════════════
+         SECTION 2 — CONTACT METHODS
+      ═══════════════════════════════════ */
+      #cMethods{background:var(--d2);padding-bottom:20px}
+      .methods-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+      .meth-card{background:var(--d3);border:1px solid var(--br);border-radius:14px;padding:32px 22px;text-align:center;transition:all .35s;position:relative;overflow:hidden}
+      .meth-card::after{content:"";position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:40px;height:2px;background:var(--g);border-radius:1px;opacity:0;transition:all .35s}
+      .meth-card:hover{border-color:var(--brh);transform:translateY(-6px);box-shadow:0 16px 44px rgba(59,130,246,0.1)}
+      .meth-card:hover::after{opacity:1;width:60px}
+      .meth-icon{width:56px;height:56px;border-radius:14px;background:rgba(59,130,246,0.08);border:1px solid var(--br);display:flex;align-items:center;justify-content:center;font-size:24px;color:var(--g);margin:0 auto 18px;transition:all .3s}
+      .meth-card:hover .meth-icon{border-color:var(--brh);background:var(--glow);box-shadow:0 0 24px rgba(59,130,246,0.18);transform:scale(1.08)}
+      .meth-title{font-family:"Outfit",sans-serif;font-size:15px;font-weight:700;color:var(--t1);margin-bottom:8px}
+      .meth-val{font-size:13.5px;color:var(--t2);line-height:1.6}
+      .meth-val a{color:var(--t2);transition:color .2s}
+      .meth-val a:hover{color:var(--g)}
+      .meth-sub{font-size:11px;color:var(--t3);margin-top:8px}
+
+      /* ═══════════════════════════════════
+         SECTION 3 — MAP + OFFICE INFO
+      ═══════════════════════════════════ */
+      #cLocation{background:var(--d1);padding-bottom:20px}
+      .loc-split{display:flex;align-items:stretch;gap:0}
+      .loc-map{flex:1.2;min-height:520px;border-radius:var(--r);overflow:hidden;border:1px solid var(--br);position:relative}
+      .loc-map iframe{width:100%;height:100%;border:none;filter:grayscale(0.8) brightness(0.7) contrast(1.1);transition:filter .5s}
+      .loc-map:hover iframe{filter:grayscale(0) brightness(0.85) contrast(1)}
+      .loc-map::after{content:"";position:absolute;inset:0;border:1px solid var(--br);border-radius:var(--r);pointer-events:none;z-index:1}
+      .loc-info{flex:0.8;display:flex;flex-direction:column;justify-content:center;padding-left:40px}
+      .loc-tag{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--g);margin-bottom:10px}
+      .loc-tag::before{content:"";width:16px;height:1.5px;background:var(--g)}
+      .loc-heading{font-family:"Outfit",sans-serif;font-size:clamp(24px,3vw,36px);font-weight:800;letter-spacing:-1px;color:var(--t1);margin-bottom:14px;line-height:1.1}
+      .loc-heading span{color:var(--g)}
+      .loc-desc{font-size:14px;color:var(--t2);line-height:1.75;margin-bottom:28px;max-width:420px}
+
+      .loc-detail{display:flex;align-items:flex-start;gap:14px;margin-bottom:20px}
+      .loc-detail-icon{width:40px;height:40px;border-radius:10px;background:rgba(59,130,246,0.08);border:1px solid var(--br);display:flex;align-items:center;justify-content:center;color:var(--g);font-size:16px;flex-shrink:0}
+      .loc-detail-text{font-size:13.5px;color:var(--t2);line-height:1.65}
+      .loc-detail-text strong{color:var(--t1);font-weight:600;display:block;margin-bottom:3px;font-size:12.5px}
+
+      .loc-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(59,130,246,0.08);border:1px solid var(--br);padding:10px 18px;border-radius:8px;font-size:12.5px;color:var(--g);font-weight:600;margin-top:10px;transition:all .25s}
+      .loc-badge:hover{border-color:var(--brh);background:var(--glow)}
+      .loc-badge i{font-size:15px}
+
+      /* ═══════════════════════════════════
+         SECTION 4 — FAQ ACCORDION
+      ═══════════════════════════════════ */
+      #cFaq{background:var(--d2);padding-bottom:20px}
+      .faq-layout{display:flex;gap:48px;align-items:start}
+      .faq-left{flex:0 0 320px;display:flex;flex-direction:column;justify-content:center;position:sticky;top:120px}
+      .faq-left .sec-h{margin-bottom:12px}
+      .faq-left .sec-lead{margin-bottom:20px}
+      .faq-left .faq-cta{display:inline-flex;align-items:center;gap:8px;font-family:"Outfit",sans-serif;font-size:13px;font-weight:700;color:var(--g);transition:gap .25s}
+      .faq-left .faq-cta:hover{gap:12px}
+      .faq-right{flex:1;display:flex;flex-direction:column;gap:10px}
+
+      .faq-item{background:var(--d3);border:1px solid var(--br);border-radius:10px;overflow:hidden;transition:border-color .25s}
+      .faq-item.open{border-color:var(--brh)}
+      .faq-q{display:flex;align-items:center;justify-content:space-between;padding:18px 22px;cursor:pointer;transition:background .2s;gap:12px}
+      .faq-q:hover{background:rgba(59,130,246,0.04)}
+      .faq-q-text{font-family:"Outfit",sans-serif;font-size:14px;font-weight:600;color:var(--t1);line-height:1.4}
+      .faq-q-arrow{width:30px;height:30px;border-radius:7px;background:rgba(59,130,246,0.08);border:1px solid var(--br);display:flex;align-items:center;justify-content:center;font-size:13px;color:var(--g);flex-shrink:0;transition:all .3s}
+      .faq-item.open .faq-q-arrow{transform:rotate(180deg);background:var(--glow);border-color:var(--brh)}
+      .faq-a{max-height:0;overflow:hidden;transition:max-height .4s cubic-bezier(.25,.46,.45,.94)}
+      .faq-a-inner{padding:0 22px 20px;font-size:13.5px;color:var(--t2);line-height:1.75}
+
+      /* ═══════════════════════════════════
+         SECTION 5 — CTA
+      ═══════════════════════════════════ */
+      #cCta{background:var(--d3);position:relative}
+      #cCta::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse at 50% 50%,rgba(59,130,246,0.06) 0%,transparent 60%);pointer-events:none}
+      #cCta::after{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--g),transparent);z-index:1;animation:ctaPulse 3s ease-in-out infinite}
+      @keyframes ctaPulse{0%,100%{opacity:.3}50%{opacity:1}}
+
+      .cta-center{text-align:center;max-width:680px;margin:0 auto;position:relative;z-index:2}
+      .cta-center .sec-tag{justify-content:center}
+      .cta-heading{font-family:"Outfit",sans-serif;font-size:clamp(26px,4.5vw,50px);font-weight:900;letter-spacing:-2px;line-height:1.05;color:var(--t1);margin-bottom:14px}
+      .cta-heading span{color:var(--g)}
+      .cta-desc{font-size:15px;color:var(--t2);line-height:1.75;margin-bottom:32px}
+      .cta-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+      .btn-p{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--g2),var(--g3));color:#fff;font-family:"Outfit",sans-serif;font-weight:700;font-size:13px;letter-spacing:.3px;padding:13px 30px;border-radius:8px;border:none;box-shadow:0 8px 28px rgba(59,130,246,0.26);transition:all .3s}
+      .btn-p:hover{transform:translateY(-2px);box-shadow:0 14px 38px rgba(59,130,246,0.42);color:#fff}
+      .btn-s{display:inline-flex;align-items:center;gap:8px;background:transparent;border:1.5px solid rgba(59,130,246,0.35);color:var(--t1);font-family:"Outfit",sans-serif;font-weight:700;font-size:13px;letter-spacing:.3px;padding:13px 30px;border-radius:8px;transition:all .3s}
+      .btn-s:hover{border-color:var(--g);color:var(--g);transform:translateY(-2px)}
+      .cta-note{font-size:12px;color:var(--t3);margin-top:18px}
+      .cta-note a{color:var(--g);transition:opacity .2s}
+      .cta-note a:hover{opacity:.8}
+
+      /* ── FOOTER ── */
+      footer{background:var(--d2);border-top:1px solid var(--br);height:auto;min-height:auto}
+      footer .container{padding:40px 0}
+      footer .logo img{height:100px;width:auto}
+      .f-desc{font-size:12.5px;color:var(--t3);line-height:1.8;margin:14px 0 20px}
+      .fsoc{display:flex;gap:7px}
+      .fsl{width:34px;height:34px;border-radius:7px;border:1px solid var(--br);background:transparent;display:flex;align-items:center;justify-content:center;color:var(--t3);font-size:14px;transition:all .25s}
+      .fsl:hover{border-color:var(--g);color:var(--g);background:var(--glow)}
+      .fh{font-family:"Outfit",sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--t1);margin-bottom:18px;padding-bottom:10px;border-bottom:1px solid var(--br)}
+      .fl{list-style:none;padding:0}
+      .fl li{margin-bottom:8px}
+      .fl a{font-size:13px;color:var(--t3);transition:color .22s,padding-left .22s}
+      .fl a:hover{color:var(--g);padding-left:4px}
+      .fcr{display:flex;align-items:flex-start;gap:10px;margin-bottom:12px}
+      .fci{width:30px;height:30px;border-radius:7px;flex-shrink:0;background:rgba(59,130,246,0.07);border:1px solid var(--br);display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--g)}
+      .fcr p{font-size:12px;color:var(--t3);margin:0;line-height:1.6}
+      .fcr a{color:var(--t3);transition:color .2s}
+      .fcr a:hover{color:var(--g)}
+      .fbot{border-top:1px solid var(--br);padding:18px 0;margin-top:40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+      .fbot p{font-size:11.5px;color:var(--t3);margin:0}
+      .fbot span{color:var(--g)}
+
+      /* ── Shared ── */
+      .sec-tag{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--g);margin-bottom:8px}
+      .sec-tag::before{content:"";width:16px;height:1.5px;background:var(--g)}
+      .sec-h{font-family:"Outfit",sans-serif;font-size:clamp(22px,3.2vw,38px);font-weight:800;letter-spacing:-1.2px;color:var(--t1);line-height:1.1;margin-bottom:8px}
+      .sec-h span{color:var(--g)}
+      .sec-lead{font-size:13.5px;color:var(--t2);max-width:480px;line-height:1.7}
+
+      .rv{opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s ease}
+      .rv.in{opacity:1;transform:none}
+      .d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
+
+      #btt{position:fixed;bottom:24px;right:24px;z-index:600;width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--g2),var(--g3));color:#fff;display:flex;align-items:center;justify-content:center;font-size:19px;cursor:pointer;opacity:0;transform:translateY(12px);transition:all .28s;border:none;box-shadow:0 7px 20px rgba(59,130,246,0.35)}
+      #btt.show{opacity:1;transform:none}
+      #btt:hover{transform:translateY(-3px)}
+
+      /* ── Toast ── */
+      .toast-msg{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--d3);border:1px solid var(--g);border-radius:10px;padding:14px 24px;font-family:"Outfit",sans-serif;font-size:13px;font-weight:600;color:var(--t1);display:flex;align-items:center;gap:10px;z-index:9000;opacity:0;transition:all .4s;pointer-events:none;box-shadow:0 12px 40px rgba(59,130,246,0.2)}
+      .toast-msg.show{opacity:1;transform:translateX(-50%) translateY(0);pointer-events:auto}
+      .toast-msg i{color:var(--g);font-size:18px}
+
+      /* ── Responsive ── */
+      @media(max-width:992px){
+        .hero-split{flex-direction:column}
+        .hero-left{padding-right:0;padding-bottom:24px}
+        .hero-divider{display:none}
+        .methods-grid{grid-template-columns:repeat(2,1fr)}
+        .loc-split{flex-direction:column}
+        .loc-info{padding-left:0;padding-top:28px}
+        .loc-map{min-height:380px}
+        .faq-layout{flex-direction:column;gap:28px}
+        .faq-left{flex:none;position:static}
+      }
+      @media(max-width:768px){
+        .fsec .container{padding:80px 0 30px}
+        #cHero .container{padding-top:80px;padding-bottom:30px}
+        .methods-grid{grid-template-columns:1fr 1fr}
+        .form-card{padding:22px 20px}
+        .fg-row{flex-direction:column;gap:0}
+        .loc-map{min-height:320px}
+      }
+      @media(max-width:576px){
+        .methods-grid{grid-template-columns:1fr}
+        .cta-btns{flex-direction:column;align-items:center}
+        .btn-p,.btn-s{width:100%;justify-content:center}
+        .loc-map{min-height:280px}
+      }
+    </style>
+  </head>
+  <body>
+    <div id="dot"></div>
+    <div id="ring"></div>
+
+    <!-- NAVBAR -->
+    <nav id="nav">
+      <div class="bar">
+        <a class="logo" href="index.html"><img src="logo2-removebg-preview (1).png" alt="" /></a>
+        <div class="nav-menu">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="services.html">Services</a>
+          <a href="portfolio.html">Projects</a>
+          <a href="testimonials.html">Clients</a>
+          <a href="contact.html" class="nav-btn cur">Contact Us</a>
+        </div>
+        <button class="burger" id="burg"><span></span><span></span><span></span></button>
+      </div>
+      <div class="mob-nav" id="mobNav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="portfolio.html">Projects</a>
+        <a href="testimonials.html">Clients</a>
+        <a href="contact.html" class="mob-btn">Contact Us →</a>
+      </div>
+    </nav>
+
+    <!-- ═══════════════════════════════════
+         SECTION 1 — HERO + FORM
+         fh-fix REMOVED — nothing gets cut
+    ═══════════════════════════════════ -->
+    <section id="cHero" class="fsec">
+      <div class="container">
+        <div class="hero-split rv">
+          <!-- Left: Info -->
+          <div class="hero-left">
+            <div class="hero-tag">Get In Touch</div>
+            <h1 class="hero-heading">Let's Build<br/>Something <span>Great.</span></h1>
+            <p class="hero-desc">Have a project in mind? Whether it's a new idea or an existing challenge, our team is ready to listen and deliver results.</p>
+
+            <div class="hero-channels">
+              <div class="hch">
+                <div class="hch-icon"><i class="bi bi-telephone"></i></div>
+                <div>
+                  <div class="hch-label">Call Us</div>
+                  <div class="hch-val"><a href="tel:+97333546555">+973 33 546 555</a></div>
+                </div>
+              </div>
+              <div class="hch">
+                <div class="hch-icon"><i class="bi bi-envelope"></i></div>
+                <div>
+                  <div class="hch-label">Email Us</div>
+                  <div class="hch-val"><a href="mailto:info@jsontechs.com">info@jsontechs.com</a></div>
+                </div>
+              </div>
+              <div class="hch">
+                <div class="hch-icon"><i class="bi bi-geo-alt"></i></div>
+                <div>
+                  <div class="hch-label">Visit Us</div>
+                  <div class="hch-val">Manama, Kingdom of Bahrain</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Divider -->
+          <div class="hero-divider"></div>
+
+          <!-- Right: Form — fully visible, nothing cut -->
+          <div class="hero-right">
+            <div class="form-card">
+              <div class="form-title">Send a Message</div>
+              <div class="form-sub">We typically respond within 2 business hours.</div>
+              <form id="contactForm">
+                <div class="fg-row">
+                  <div class="fg">
+                    <label>First Name</label>
+                    <input type="text" placeholder="John" required />
+                  </div>
+                  <div class="fg">
+                    <label>Last Name</label>
+                    <input type="text" placeholder="Doe" required />
+                  </div>
+                </div>
+                <div class="fg">
+                  <label>Email Address</label>
+                  <input type="email" placeholder="john@company.com" required />
+                </div>
+                <div class="fg">
+                  <label>Phone Number</label>
+                  <input type="tel" placeholder="+973 XXXX XXXX" />
+                </div>
+                <div class="fg">
+                  <label>Service Interested In</label>
+                  <select required>
+                    <option value="" disabled selected>Select a service</option>
+                    <option>Custom Software Development</option>
+                    <option>Cloud Infrastructure</option>
+                    <option>Cyber Security</option>
+                    <option>Data Analytics</option>
+                    <option>DevOps & Automation</option>
+                    <option>IT Consulting</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+                <div class="fg">
+                  <label>Project Details</label>
+                  <textarea placeholder="Tell us about your project, timeline, and budget..." required></textarea>
+                </div>
+                <button type="submit" class="form-submit">Send Message <i class="bi bi-send"></i></button>
+                <div class="form-note"><i class="bi bi-shield-check"></i> Your information is secure and confidential.</div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════
+         SECTION 2 — CONTACT METHODS
+    ═══════════════════════════════════ -->
+    <section id="cMethods" class="fsec">
+      <div class="container">
+        <div style="text-align:center;margin-bottom:36px" class="rv">
+          <div class="sec-tag" style="justify-content:center">Multiple Channels</div>
+          <div class="sec-h" style="margin-inline:auto">Reach Us <span>Your Way</span></div>
+          <p class="sec-lead" style="margin-inline:auto;text-align:center">We're available through multiple channels to ensure you get the support you need, when you need it.</p>
+        </div>
+        <div class="methods-grid rv d1">
+          <div class="meth-card">
+            <div class="meth-icon"><i class="bi bi-telephone-fill"></i></div>
+            <div class="meth-title">Phone</div>
+            <div class="meth-val"><a href="tel:+97333546555">+973 33 546 555</a><br/><a href="tel:+97317789012">+973 1 778 9012</a></div>
+            <div class="meth-sub">Sun – Thu, 8AM – 6PM</div>
+          </div>
+          <div class="meth-card">
+            <div class="meth-icon"><i class="bi bi-envelope-fill"></i></div>
+            <div class="meth-title">Email</div>
+            <div class="meth-val"><a href="mailto:info@jsontechs.com">info@jsontechs.com</a><br/><a href="mailto:sales@jsontechs.com">sales@jsontechs.com</a></div>
+            <div class="meth-sub">Response within 2 hours</div>
+          </div>
+          <div class="meth-card">
+            <div class="meth-icon"><i class="bi bi-chat-dots-fill"></i></div>
+            <div class="meth-title">Live Chat</div>
+            <div class="meth-val">Available on website<br/>bottom-right corner</div>
+            <div class="meth-sub">Instant support</div>
+          </div>
+          <div class="meth-card">
+            <div class="meth-icon"><i class="bi bi-calendar-check-fill"></i></div>
+            <div class="meth-title">Schedule Meeting</div>
+            <div class="meth-val"><a href="mailto:info@jsontechs.com">Book a time slot</a><br/>Free 30-min session</div>
+            <div class="meth-sub">Strategy consultation</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════
+         SECTION 3 — MAP + OFFICE INFO
+    ═══════════════════════════════════ -->
+    <section id="cLocation" class="fsec">
+      <div class="container">
+        <div class="loc-split rv">
+          <div class="loc-map">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3628.9535487!2d50.5876!3d26.2285!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMjbCsDEzJzQyLjYiTiA1MMKwMzUnMTUuNCJF!5e0!3m2!1sen!2sbh!4v1700000000000" allowfullscreen loading="lazy"></iframe>
+          </div>
+          <div class="loc-info">
+            <div class="loc-tag">Our Office</div>
+            <h2 class="loc-heading">Headquartered in <span>Manama</span></h2>
+            <p class="loc-desc">Located in the heart of Bahrain's business district, our office is easily accessible and designed for collaboration.</p>
+
+            <div class="loc-detail">
+              <div class="loc-detail-icon"><i class="bi bi-building"></i></div>
+              <div class="loc-detail-text">
+                <strong>Address</strong>
+                Diplomatic Area, Tower 1, Floor 12<br/>
+                Manama, Kingdom of Bahrain
+              </div>
+            </div>
+            <div class="loc-detail">
+              <div class="loc-detail-icon"><i class="bi bi-clock"></i></div>
+              <div class="loc-detail-text">
+                <strong>Working Hours</strong>
+                Sunday – Thursday: 8:00 AM – 6:00 PM<br/>
+                Friday – Saturday: Closed
+              </div>
+            </div>
+            <div class="loc-detail">
+              <div class="loc-detail-icon"><i class="bi bi-parking"></i></div>
+              <div class="loc-detail-text">
+                <strong>Parking</strong>
+                Free underground parking available for visitors
+              </div>
+            </div>
+            <div class="loc-detail">
+              <div class="loc-detail-icon"><i class="bi bi-headset"></i></div>
+              <div class="loc-detail-text">
+                <strong>24/7 Emergency Support</strong>
+                <a href="tel:+97333546000" style="color:var(--g)">+973 33 546 000</a> for critical issues
+              </div>
+            </div>
+
+            <div class="loc-badge"><i class="bi bi-pin-map-fill"></i> 5 min from Bahrain Financial Harbour</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════
+         SECTION 4 — FAQ
+    ═══════════════════════════════════ -->
+    <section id="cFaq" class="fsec">
+      <div class="container">
+        <div class="faq-layout rv">
+          <div class="faq-left">
+            <div class="sec-tag">FAQ</div>
+            <div class="sec-h">Common <span>Questions</span></div>
+            <p class="sec-lead">Quick answers to questions we hear most often. Can't find what you need? Reach out directly.</p>
+            <a href="#cHero" class="faq-cta">Contact us instead <i class="bi bi-arrow-right"></i></a>
+          </div>
+          <div class="faq-right">
+            <div class="faq-item">
+              <div class="faq-q">
+                <span class="faq-q-text">What is your typical project timeline?</span>
+                <div class="faq-q-arrow"><i class="bi bi-chevron-down"></i></div>
+              </div>
+              <div class="faq-a"><div class="faq-a-inner">Timelines vary by scope. A standard web application takes 6–10 weeks, while enterprise solutions can range from 3–6 months. We provide a detailed timeline during the discovery phase with clear milestones.</div></div>
+            </div>
+            <div class="faq-item">
+              <div class="faq-q">
+                <span class="faq-q-text">Do you work with clients outside Bahrain?</span>
+                <div class="faq-q-arrow"><i class="bi bi-chevron-down"></i></div>
+              </div>
+              <div class="faq-a"><div class="faq-a-inner">Yes, we serve clients across the GCC and internationally. Our team is experienced in remote collaboration and follows agile methodologies to ensure seamless delivery regardless of location.</div></div>
+            </div>
+            <div class="faq-item">
+              <div class="faq-q">
+                <span class="faq-q-text">What technologies do you specialize in?</span>
+                <div class="faq-q-arrow"><i class="bi bi-chevron-down"></i></div>
+              </div>
+              <div class="faq-a"><div class="faq-a-inner">We work with React, Angular, Vue.js, Node.js, Python, .NET, Java, AWS, Azure, GCP, Docker, Kubernetes, TensorFlow, Power BI, and more. We choose the optimal stack based on your project's specific requirements and long-term goals.</div></div>
+            </div>
+            <div class="faq-item">
+              <div class="faq-q">
+                <span class="faq-q-text">How do you handle data security and compliance?</span>
+                <div class="faq-q-arrow"><i class="bi bi-chevron-down"></i></div>
+              </div>
+              <div class="faq-a"><div class="faq-a-inner">Security is embedded in our development lifecycle. We follow ISO 27001 standards, conduct regular penetration testing, and ensure compliance with Bahrain PDPL, UAE PDPL, and GDPR. All projects undergo threat modeling and secure code reviews.</div></div>
+            </div>
+            <div class="faq-item">
+              <div class="faq-q">
+                <span class="faq-q-text">What is your pricing model?</span>
+                <div class="faq-q-arrow"><i class="bi bi-chevron-down"></i></div>
+              </div>
+              <div class="faq-a"><div class="faq-a-inner">We offer fixed-price, time & materials, and retainer models. After understanding your requirements in detail, we recommend the most suitable approach with fully transparent pricing and no hidden costs.</div></div>
+            </div>
+            <div class="faq-item">
+              <div class="faq-q">
+                <span class="faq-q-text">Do you provide post-launch support?</span>
+                <div class="faq-q-arrow"><i class="bi bi-chevron-down"></i></div>
+              </div>
+              <div class="faq-a"><div class="faq-a-inner">Absolutely. We offer tiered SLA-based support packages — from basic bug fixes to 24/7 dedicated support with incident management. All packages include security patches and performance monitoring.</div></div>
+            </div>
+            <div class="faq-item">
+              <div class="faq-q">
+                <span class="faq-q-text">Can you augment our existing IT team?</span>
+                <div class="faq-q-arrow"><i class="bi bi-chevron-down"></i></div>
+              </div>
+              <div class="faq-a"><div class="faq-a-inner">Yes, staff augmentation is one of our core services. Our engineers integrate seamlessly with your workflows, tools, and communication channels. We also provide knowledge transfer and upskilling sessions for your in-house team.</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════
+         SECTION 5 — CTA
+    ═══════════════════════════════════ -->
+    <section id="cCta" class="fsec">
+      <div class="container">
+        <div class="cta-center rv">
+          <div class="sec-tag" style="justify-content:center">One More Thing</div>
+          <h2 class="cta-heading">Not Sure Where<br/>To <span>Start?</span></h2>
+          <p class="cta-desc">Book a free 30-minute consultation with our experts. No obligations, no pressure — just honest advice about your technology needs.</p>
+          <div class="cta-btns">
+            <a href="mailto:info@jsontechs.com" class="btn-p">Book Free Consultation <i class="bi bi-arrow-right"></i></a>
+            <a href="tel:+97333546555" class="btn-s"><i class="bi bi-telephone"></i> Call Directly</a>
+          </div>
+          <p class="cta-note">Available Sunday – Thursday, 8AM – 6PM Bahrain Time</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="container">
+        <div class="row g-5">
+          <div class="col-lg-4 col-md-6">
+            <a class="logo" href="#"><img src="logo2-removebg-preview (1).png" alt="" /></a>
+            <p class="f-desc">JSONTECH is a leading IT solutions provider based in Bahrain, committed to driving digital transformation and technological excellence for businesses across the GCC.</p>
+            <div class="fsoc">
+              <a href="#" class="fsl"><i class="bi bi-linkedin"></i></a>
+              <a href="#" class="fsl"><i class="bi bi-twitter-x"></i></a>
+              <a href="#" class="fsl"><i class="bi bi-instagram"></i></a>
+              <a href="#" class="fsl"><i class="bi bi-facebook"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-2 col-md-6">
+            <div class="fh">Company</div>
+            <ul class="fl">
+              <li><a href="about.html">About Us</a></li>
+              <li><a href="services.html">Services</a></li>
+              <li><a href="portfolio.html">Case Studies</a></li>
+              <li><a href="#">Careers</a></li>
+              <li><a href="#">Blog</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="fh">Solutions</div>
+            <ul class="fl">
+              <li><a href="#">Custom Software</a></li>
+              <li><a href="#">Cloud Services</a></li>
+              <li><a href="#">Cyber Security</a></li>
+              <li><a href="#">Data Analytics</a></li>
+              <li><a href="#">IT Consulting</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="fh">Contact</div>
+            <div class="fcr"><div class="fci"><i class="bi bi-geo-alt"></i></div><p>Manama, Kingdom of Bahrain</p></div>
+            <div class="fcr"><div class="fci"><i class="bi bi-envelope"></i></div><p><a href="mailto:info@jsontechs.com">info@jsontechs.com</a></p></div>
+            <div class="fcr"><div class="fci"><i class="bi bi-telephone"></i></div><p><a href="tel:+97333546555">+973 33 546 555</a></p></div>
+          </div>
+        </div>
+        <div class="fbot">
+          <p>&copy; 2024 <span>JSONTECH</span>. All rights reserved.</p>
+          <p>Engineered for Excellence</p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Toast -->
+    <div class="toast-msg" id="toast"><i class="bi bi-check-circle-fill"></i> <span id="toastText">Message sent successfully!</span></div>
+
+    <button id="btt" onclick="scrollTo({top:0,behavior:'smooth'})"><i class="bi bi-arrow-up"></i></button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      /* Cursor */
+      const dot=document.getElementById("dot"),ring=document.getElementById("ring");
+      document.addEventListener("mousemove",e=>{dot.style.left=e.clientX+"px";dot.style.top=e.clientY+"px";ring.style.left=e.clientX+"px";ring.style.top=e.clientY+"px"});
+      document.querySelectorAll("a,button,.faq-q,.meth-card,.form-submit").forEach(el=>{
+        el.addEventListener("mouseenter",()=>{dot.style.transform="translate(-50%,-50%) scale(2.2)";ring.style.opacity=".8"});
+        el.addEventListener("mouseleave",()=>{dot.style.transform="translate(-50%,-50%) scale(1)";ring.style.opacity=".4"})
+      });
+
+      /* Navbar */
+      const navEl=document.getElementById("nav");
+      window.addEventListener("scroll",()=>{navEl.classList.toggle("stuck",scrollY>55);document.getElementById("btt").classList.toggle("show",scrollY>380)});
+      const burg=document.getElementById("burg"),mobNav=document.getElementById("mobNav");
+      burg.onclick=()=>{burg.classList.toggle("open");mobNav.classList.toggle("open")};
+      mobNav.querySelectorAll("a").forEach(a=>a.onclick=()=>{burg.classList.remove("open");mobNav.classList.remove("open")});
+
+      /* Form Submit */
+      document.getElementById("contactForm").addEventListener("submit",function(e){
+        e.preventDefault();
+        const toast=document.getElementById("toast");
+        document.getElementById("toastText").textContent="Message sent successfully! We'll get back to you soon.";
+        toast.classList.add("show");
+        this.reset();
+        setTimeout(()=>toast.classList.remove("show"),4000);
+      });
+
+      /* FAQ Accordion */
+      document.querySelectorAll(".faq-q").forEach(q=>{
+        q.addEventListener("click",function(){
+          const item=this.parentElement;
+          const a=item.querySelector(".faq-a");
+          const isOpen=item.classList.contains("open");
+
+          document.querySelectorAll(".faq-item").forEach(fi=>{
+            fi.classList.remove("open");
+            fi.querySelector(".faq-a").style.maxHeight="0";
+          });
+
+          if(!isOpen){
+            item.classList.add("open");
+            a.style.maxHeight=a.scrollHeight+"px";
+          }
+        });
+      });
+
+      /* Reveal */
+      const ro=new IntersectionObserver(es=>{
+        es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");ro.unobserve(e.target)}})
+      },{threshold:0.08});
+      document.querySelectorAll(".rv").forEach(el=>ro.observe(el));
+    </script>
+  </body>
+</html>

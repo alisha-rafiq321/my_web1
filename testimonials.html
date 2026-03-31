@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JSONTECH — Our Clients | Bahrain</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+    <style>
+      :root {
+        --g: #3b82f6;
+        --g2: #60a5fa;
+        --g3: #1d4ed8;
+        --glow: rgba(59,130,246,0.16);
+        --d1: #07070a;
+        --d2: #0d0d12;
+        --d3: #131319;
+        --d4: #1a1a23;
+        --d5: #21212d;
+        --t1: #edebe5;
+        --t2: #a09e99;
+        --t3: #5e5e6e;
+        --br: rgba(59,130,246,0.13);
+        --brh: rgba(59,130,246,0.4);
+        --r: 14px;
+      }
+      *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+      html{scroll-behavior:smooth}
+      body{font-family:"Plus Jakarta Sans",sans-serif;font-size:15px;line-height:1.65;background:var(--d1);color:var(--t1);overflow-x:hidden;cursor:none}
+      img{display:block;max-width:100%}
+      a{text-decoration:none}
+      ::-webkit-scrollbar{width:3px}
+      ::-webkit-scrollbar-thumb{background:var(--g);border-radius:2px}
+
+      #dot{position:fixed;width:8px;height:8px;background:var(--g);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .1s}
+      #ring{position:fixed;width:30px;height:30px;border:1.5px solid var(--g);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);opacity:.4;transition:left .12s,top .12s,opacity .2s}
+
+      /* ── NAV ── */
+      #nav{position:fixed;top:0;left:0;width:100%;z-index:800;transition:all .35s}
+      #nav .bar{display:flex;align-items:center;max-width:1280px;margin:0 auto;padding:12px 40px;transition:all .35s}
+      #nav.stuck .bar{padding:10px 40px;background:rgba(7,7,10,0.95);backdrop-filter:blur(24px);border-bottom:1px solid var(--br)}
+      .logo{display:flex;align-items:center;gap:12px;flex-shrink:0;margin-right:30px!important}
+      .logo img{height:120px;width:auto;object-fit:contain;transition:all .3s ease}
+      #nav.stuck .logo img{height:90px}
+      .nav-menu{display:flex;align-items:center;gap:2px;margin-left:30px!important}
+      .nav-menu a{font-size:13px;font-weight:500;color:var(--t2);padding:7px 14px;border-radius:7px;letter-spacing:.4px;transition:color .2s,background .2s}
+      .nav-menu a:hover,.nav-menu a.cur{color:var(--g);background:var(--glow)}
+      .nav-btn{margin-left:10px;background:linear-gradient(135deg,var(--g2),var(--g3));color:#fff!important;font-family:"Outfit",sans-serif;font-weight:700;font-size:12.5px;letter-spacing:.3px;padding:9px 22px;border-radius:8px;box-shadow:0 4px 18px rgba(59,130,246,0.28);transition:opacity .2s,transform .2s}
+      .nav-btn:hover{opacity:.85;transform:translateY(-1px)}
+      .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;margin-left:auto;border:none;background:none;padding:4px}
+      .burger span{display:block;width:22px;height:2px;background:var(--g);border-radius:2px;transition:all .28s}
+      .burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+      .burger.open span:nth-child(2){opacity:0}
+      .burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+      .mob-nav{display:none;flex-direction:column;gap:2px;background:var(--d3);border-top:1px solid var(--br);padding:12px 22px 18px}
+      .mob-nav.open{display:flex}
+      .mob-nav a{font-size:15px;font-weight:500;color:var(--t2);padding:10px 12px;border-radius:7px;transition:color .2s,background .2s}
+      .mob-nav a:hover{color:var(--g);background:var(--glow)}
+      .mob-nav .mob-btn{background:linear-gradient(135deg,var(--g2),var(--g3));color:#fff!important;font-family:"Outfit",sans-serif;font-weight:700;text-align:center;margin-top:6px;border-radius:8px}
+      @media(max-width:880px){.nav-menu{display:none}.burger{display:flex}.bar{padding:12px 20px!important}.logo img{height:120px}#nav.stuck .logo img{height:90px}}
+
+      /* ── FULL-FRAME ── */
+      .fsec{height:100vh;min-height:600px;position:relative;overflow:hidden;display:flex;flex-direction:column}
+      .fsec .container{flex:1;display:flex;flex-direction:column;justify-content:center;padding:90px 0 30px}
+
+      /* ── Side Nav ── */
+      .side-nav{position:fixed;right:24px;top:50%;transform:translateY(-50%);z-index:700;display:flex;flex-direction:column;gap:14px}
+      .side-nav a{width:10px;height:10px;border-radius:50%;border:1.5px solid rgba(59,130,246,0.3);background:transparent;transition:all .3s;position:relative}
+      .side-nav a.active{background:var(--g);border-color:var(--g);box-shadow:0 0 10px rgba(59,130,246,0.5)}
+      .side-nav a .tip{position:absolute;right:22px;top:50%;transform:translateY(-50%);font-size:10px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--t3);white-space:nowrap;opacity:0;transition:opacity .25s;pointer-events:none}
+      .side-nav a:hover .tip{opacity:1;color:var(--g)}
+      @media(max-width:768px){.side-nav{display:none}}
+
+      /* ── HERO ── */
+      #cHero{background:var(--d1)}
+      #cHero::before{content:"";position:absolute;top:-20%;right:-10%;width:700px;height:700px;background:radial-gradient(circle,rgba(59,130,246,0.07) 0%,transparent 65%);border-radius:50%;animation:heroPulse 6s ease-in-out infinite;pointer-events:none}
+      @keyframes heroPulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.15);opacity:.6}}
+      .hero-grid{position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(59,130,246,0.02) 1px,transparent 1px),linear-gradient(90deg,rgba(59,130,246,0.02) 1px,transparent 1px);background-size:80px 80px}
+      .ch-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(59,130,246,0.08);border:1px solid var(--br);padding:6px 16px;border-radius:20px;font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--g);margin-bottom:20px}
+      .ch-badge i{font-size:12px}
+      .ch-title{font-family:"Outfit",sans-serif;font-size:clamp(36px,6vw,78px);font-weight:900;letter-spacing:-3px;line-height:.95;color:var(--t1);margin-bottom:16px}
+      .ch-title .thin{font-weight:300;color:var(--t2)}
+      .ch-title .acc{color:var(--g);position:relative}
+      .ch-title .acc::after{content:"";position:absolute;bottom:2px;left:0;width:100%;height:3px;background:var(--g);border-radius:2px;opacity:.4}
+      .ch-sub{font-size:16px;color:var(--t2);max-width:420px;line-height:1.75;margin-bottom:28px}
+      .hero-img-cluster{position:absolute;right:0;top:0;bottom:0;width:55%;pointer-events:none}
+      .hero-img-cluster .himg{position:absolute;border-radius:var(--r);overflow:hidden;border:1px solid var(--br);box-shadow:0 20px 60px rgba(0,0,0,0.5)}
+      .hero-img-cluster .himg img{width:100%;height:100%;object-fit:cover}
+      .hero-img-cluster .himg-1{width:320px;height:220px;top:18%;right:8%;z-index:3;animation:float1 7s ease-in-out infinite}
+      .hero-img-cluster .himg-2{width:200px;height:150px;top:12%;right:38%;z-index:2;animation:float2 8s ease-in-out infinite}
+      .hero-img-cluster .himg-3{width:240px;height:180px;bottom:18%;right:15%;z-index:2;animation:float3 9s ease-in-out infinite}
+      @keyframes float1{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-12px) rotate(.5deg)}}
+      @keyframes float2{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-18px) rotate(-.8deg)}}
+      @keyframes float3{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+      .hero-stat-row{display:flex;gap:40px;margin-top:10px}
+      .hero-stat-row .hs-item .hs-n{font-family:"Outfit",sans-serif;font-size:36px;font-weight:900;color:var(--g);line-height:1;letter-spacing:-2px}
+      .hero-stat-row .hs-item .hs-l{font-size:11px;color:var(--t3);text-transform:uppercase;letter-spacing:1.5px;margin-top:4px}
+      .diagonal-line{position:absolute;top:0;bottom:0;left:42%;width:1px;background:linear-gradient(to bottom,transparent,rgba(59,130,246,0.15),rgba(59,130,246,0.3),rgba(59,130,246,0.15),transparent);pointer-events:none;z-index:1}
+      .diagonal-accent{position:absolute;bottom:0;left:42%;width:200px;height:200px;border-bottom:1px solid rgba(59,130,246,0.08);border-right:1px solid rgba(59,130,246,0.08);pointer-events:none;z-index:1}
+
+      /* ── TRUSTED BY — Bento ── */
+      #cTrust{background:var(--d2)}
+      #cTrust::after{content:"TRUSTED";position:absolute;left:-40px;top:50%;transform:translateY(-50%) rotate(-90deg);font-family:"Outfit",sans-serif;font-size:120px;font-weight:900;color:rgba(255,255,255,0.015);letter-spacing:-6px;pointer-events:none;white-space:nowrap}
+      .bento{display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:repeat(3,1fr);gap:12px;max-height:calc(100vh - 210px);height:100%}
+      .bento-cell{background:var(--d3);border:1px solid var(--br);border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px;transition:all .35s;position:relative;overflow:hidden;cursor:default}
+      .bento-cell::before{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(59,130,246,0.06),transparent);opacity:0;transition:opacity .35s}
+      .bento-cell:hover{border-color:var(--brh);transform:translateY(-2px);box-shadow:0 8px 30px rgba(59,130,246,0.08)}
+      .bento-cell:hover::before{opacity:1}
+      .bento-cell.span2{grid-column:span 2}
+      .bento-cell.row2{grid-row:span 2}
+      .bento-cell .bc-logo{font-family:"Outfit",sans-serif;font-size:clamp(13px,1.6vw,20px);font-weight:800;color:var(--t1);letter-spacing:-.5px;text-align:center;z-index:1}
+      .bento-cell .bc-logo span{color:var(--g)}
+      .bento-cell .bc-tag{font-size:9px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;color:var(--t3);margin-top:5px;z-index:1}
+      .bento-cell .bc-icon{font-size:26px;color:var(--g);margin-bottom:6px;z-index:1;opacity:.6}
+      .bento-cell .bc-img{position:absolute;inset:0;opacity:.06;z-index:0}
+      .bento-cell .bc-img img{width:100%;height:100%;object-fit:cover}
+
+      /* ── FEATURED TESTIMONIAL ── */
+      #cFeatured{background:var(--d1);position:relative}
+      .feat-bg{position:absolute;inset:0;overflow:hidden}
+      .feat-bg img{width:100%;height:100%;object-fit:cover;filter:brightness(0.15) saturate(0.6)}
+      .feat-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(7,7,10,0.85) 0%,rgba(7,7,10,0.5) 50%,rgba(7,7,10,0.7) 100%)}
+      .feat-content{position:relative;z-index:3;height:100%;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;max-width:900px;margin:0 auto;transition:opacity .35s,transform .35s}
+      .feat-quot{font-size:clamp(80px,12vw,160px);font-family:Georgia,serif;color:var(--g);line-height:.6;opacity:.25;margin-bottom:-20px;user-select:none}
+      .feat-text{font-family:"Outfit",sans-serif;font-size:clamp(20px,3vw,34px);font-weight:300;letter-spacing:-.5px;line-height:1.45;color:var(--t1);margin-bottom:30px;max-width:780px}
+      .feat-text strong{color:var(--g);font-weight:700}
+      .feat-author{display:flex;align-items:center;gap:16px}
+      .feat-avatar{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,var(--g2),var(--g3));display:flex;align-items:center;justify-content:center;font-family:"Outfit",sans-serif;font-weight:800;font-size:18px;color:#fff;box-shadow:0 8px 24px rgba(59,130,246,0.3);flex-shrink:0}
+      .feat-author-info{text-align:left}
+      .feat-author-info .fa-name{font-family:"Outfit",sans-serif;font-size:16px;font-weight:700;color:var(--t1)}
+      .feat-author-info .fa-role{font-size:12px;color:var(--t3)}
+      .feat-nav{display:flex;gap:10px;margin-top:30px}
+      .feat-nav button{width:44px;height:44px;border-radius:50%;border:1.5px solid rgba(59,130,246,0.3);background:rgba(7,7,10,0.5);backdrop-filter:blur(8px);color:var(--t2);font-size:18px;cursor:pointer;transition:all .28s;display:flex;align-items:center;justify-content:center}
+      .feat-nav button:hover{border-color:var(--g);color:var(--g);background:var(--glow)}
+      .feat-counter{font-family:"Outfit",sans-serif;font-size:13px;color:var(--t3);align-self:center;margin-left:12px}
+      .feat-counter b{color:var(--g)}
+
+      /* ── INDUSTRIES ── */
+      #cIndustries{background:var(--d3)}
+      .ind-strip{display:flex;gap:16px;overflow:hidden;padding:10px 0;flex:1;min-height:0}
+      .ind-card{flex:0 0 calc(25% - 12px);background:var(--d1);border:1px solid var(--br);border-radius:16px;overflow:hidden;display:flex;flex-direction:column;transition:all .35s;cursor:default}
+      .ind-card:hover{border-color:var(--brh);transform:translateY(-4px);box-shadow:0 12px 40px rgba(59,130,246,0.1)}
+      .ind-card-img{height:45%;overflow:hidden;position:relative}
+      .ind-card-img img{width:100%;height:100%;object-fit:cover;transition:transform .6s}
+      .ind-card:hover .ind-card-img img{transform:scale(1.08)}
+      .ind-card-img::after{content:"";position:absolute;bottom:0;left:0;right:0;height:40%;background:linear-gradient(to top,var(--d1),transparent)}
+      .ind-card-body{padding:18px 20px;flex:1;display:flex;flex-direction:column;justify-content:center}
+      .ind-card-body .ind-icon{width:36px;height:36px;border-radius:8px;background:rgba(59,130,246,0.1);border:1px solid var(--br);display:flex;align-items:center;justify-content:center;color:var(--g);font-size:16px;margin-bottom:10px}
+      .ind-card-body h4{font-family:"Outfit",sans-serif;font-size:15px;font-weight:700;color:var(--t1);margin-bottom:4px;letter-spacing:-.3px}
+      .ind-card-body p{font-size:11.5px;color:var(--t3);margin:0;line-height:1.55}
+      .ind-card-body .ind-count{font-family:"Outfit",sans-serif;font-size:11px;font-weight:700;color:var(--g);margin-top:8px}
+      .ind-scroll-btn{width:42px;height:42px;border-radius:50%;border:1.5px solid var(--br);background:var(--d2);color:var(--t2);font-size:18px;cursor:pointer;transition:all .25s;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+      .ind-scroll-btn:hover{border-color:var(--g);color:var(--g);background:var(--glow)}
+
+      /* ═══════════════════════════════════
+         REVIEWS — 3 Clean Cards (No Masonry)
+      ═══════════════════════════════════ */
+      #cMore{background:var(--d2)}
+      .rev-grid{
+        display:grid;
+        grid-template-columns:repeat(3,1fr);
+        gap:16px;
+        width:100%;
+      }
+      .rev-card{
+        background:var(--d3);
+        border:1px solid var(--br);
+        border-radius:14px;
+        padding:22px;
+        display:flex;
+        flex-direction:column;
+        transition:all .3s;
+        position:relative;
+        overflow:hidden;
+      }
+      .rev-card::after{
+        content:"";
+        position:absolute;
+        top:0;left:0;right:0;
+        height:2px;
+        background:linear-gradient(90deg,var(--g3),var(--g),var(--g3));
+        opacity:0;
+        transition:opacity .3s;
+      }
+      .rev-card:hover{
+        border-color:var(--brh);
+        box-shadow:0 8px 30px rgba(59,130,246,0.06);
+      }
+      .rev-card:hover::after{opacity:1}
+      .rev-card .rc-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+      .rev-card .rc-stars{color:var(--g);font-size:11px;letter-spacing:2px}
+      .rev-card .rc-ico{width:30px;height:30px;border-radius:50%;background:rgba(59,130,246,0.08);border:1px solid var(--br);display:flex;align-items:center;justify-content:center;color:var(--g);font-size:20px;font-family:Georgia,serif;line-height:1}
+      .rev-card .rc-text{font-size:13px;line-height:1.7;color:var(--t2);font-style:italic;flex:1;margin-bottom:14px}
+      .rev-card .rc-author{display:flex;align-items:center;gap:10px;padding-top:12px;border-top:1px solid var(--br)}
+      .rev-card .rc-av{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,var(--g2),var(--g3));display:flex;align-items:center;justify-content:center;font-family:"Outfit",sans-serif;font-weight:800;font-size:11px;color:#fff;flex-shrink:0}
+      .rev-card .rc-name{font-family:"Outfit",sans-serif;font-size:12px;font-weight:700;color:var(--t1)}
+      .rev-card .rc-role{font-size:10px;color:var(--t3)}
+
+      /* ── CTA ── */
+      #cCta{background:var(--d1);position:relative;overflow:hidden}
+      #cCta::before{content:"";position:absolute;top:50%;left:50%;width:800px;height:800px;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(59,130,246,0.06) 0%,transparent 60%);pointer-events:none}
+      .cta-split{display:flex;align-items:stretch;height:100%;gap:0}
+      .cta-left{flex:1;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:2;padding-right:40px}
+      .cta-right{flex:1;position:relative;overflow:hidden;border-radius:var(--r);margin-left:20px}
+      .cta-right img{width:100%;height:100%;object-fit:cover}
+      .cta-right::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--d1) 0%,transparent 40%)}
+      .cta-right::before{content:"";position:absolute;inset:0;border:1px solid var(--br);border-radius:var(--r);z-index:1}
+      .cta-tag{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--g);margin-bottom:14px}
+      .cta-tag::before{content:"";width:20px;height:1.5px;background:var(--g)}
+      .cta-heading{font-family:"Outfit",sans-serif;font-size:clamp(28px,4vw,48px);font-weight:900;letter-spacing:-2px;line-height:1.05;color:var(--t1);margin-bottom:14px}
+      .cta-heading span{color:var(--g)}
+      .cta-desc{font-size:14.5px;color:var(--t2);line-height:1.75;margin-bottom:28px;max-width:440px}
+      .cta-actions{display:flex;gap:12px;flex-wrap:wrap}
+      .btn-p{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--g2),var(--g3));color:#fff;font-family:"Outfit",sans-serif;font-weight:700;font-size:13px;letter-spacing:.3px;padding:12px 28px;border-radius:8px;border:none;box-shadow:0 8px 28px rgba(59,130,246,0.26);transition:all .3s}
+      .btn-p:hover{transform:translateY(-2px);box-shadow:0 14px 38px rgba(59,130,246,0.42);color:#fff}
+      .btn-s{display:inline-flex;align-items:center;gap:8px;background:transparent;border:1.5px solid rgba(59,130,246,0.35);color:var(--t1);font-family:"Outfit",sans-serif;font-weight:700;font-size:13px;letter-spacing:.3px;padding:12px 28px;border-radius:8px;transition:all .3s}
+      .btn-s:hover{border-color:var(--g);color:var(--g);transform:translateY(-2px)}
+      .cta-note{font-size:12px;color:var(--t3);margin-top:18px}
+      .cta-note a{color:var(--g);transition:opacity .2s}
+      .cta-note a:hover{opacity:.8}
+
+      /* ── FOOTER ── */
+      footer{background:var(--d2);border-top:1px solid var(--br);height:auto;min-height:auto}
+      footer .container{padding:40px 0}
+      footer .logo img{height:100px;width:auto}
+      .f-desc{font-size:12.5px;color:var(--t3);line-height:1.8;margin:14px 0 20px}
+      .fsoc{display:flex;gap:7px}
+      .fsl{width:34px;height:34px;border-radius:7px;border:1px solid var(--br);background:transparent;display:flex;align-items:center;justify-content:center;color:var(--t3);font-size:14px;transition:all .25s}
+      .fsl:hover{border-color:var(--g);color:var(--g);background:var(--glow)}
+      .fh{font-family:"Outfit",sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--t1);margin-bottom:18px;padding-bottom:10px;border-bottom:1px solid var(--br)}
+      .fl{list-style:none;padding:0}
+      .fl li{margin-bottom:8px}
+      .fl a{font-size:13px;color:var(--t3);transition:color .22s,padding-left .22s}
+      .fl a:hover{color:var(--g);padding-left:4px}
+      .fcr{display:flex;align-items:flex-start;gap:10px;margin-bottom:12px}
+      .fci{width:30px;height:30px;border-radius:7px;flex-shrink:0;background:rgba(59,130,246,0.07);border:1px solid var(--br);display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--g)}
+      .fcr p{font-size:12px;color:var(--t3);margin:0;line-height:1.6}
+      .fcr a{color:var(--t3);transition:color .2s}
+      .fcr a:hover{color:var(--g)}
+      .fbot{border-top:1px solid var(--br);padding:18px 0;margin-top:40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+      .fbot p{font-size:11.5px;color:var(--t3);margin:0}
+      .fbot span{color:var(--g)}
+
+      /* ── Reveal ── */
+      .rv{opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s ease}
+      .rv.in{opacity:1;transform:none}
+      .d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}.d4{transition-delay:.4s}
+
+      .sec-tag{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--g);margin-bottom:8px}
+      .sec-tag::before{content:"";width:16px;height:1.5px;background:var(--g)}
+      .sec-h{font-family:"Outfit",sans-serif;font-size:clamp(24px,3.5vw,40px);font-weight:800;letter-spacing:-1.2px;color:var(--t1);line-height:1.1;margin-bottom:8px}
+      .sec-h span{color:var(--g)}
+      .sec-lead{font-size:13.5px;color:var(--t2);max-width:500px;line-height:1.7}
+
+      #btt{position:fixed;bottom:24px;right:24px;z-index:600;width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--g2),var(--g3));color:#fff;display:flex;align-items:center;justify-content:center;font-size:19px;cursor:pointer;opacity:0;transform:translateY(12px);transition:all .28s;border:none;box-shadow:0 7px 20px rgba(59,130,246,0.35)}
+      #btt.show{opacity:1;transform:none}
+      #btt:hover{transform:translateY(-3px)}
+
+      /* ── RESPONSIVE ── */
+      @media(max-width:992px){
+        .hero-img-cluster{display:none}
+        .diagonal-line,.diagonal-accent{display:none}
+        .bento{grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(4,1fr);max-height:none}
+        .bento-cell.span2{grid-column:span 1}
+        .bento-cell.row2{grid-row:span 1}
+        .ind-card{flex:0 0 calc(33.33% - 11px)}
+        .rev-grid{grid-template-columns:repeat(2,1fr)}
+        .cta-split{flex-direction:column}
+        .cta-left{padding-right:0;padding-bottom:20px}
+        .cta-right{margin-left:0;flex:0 0 40vh}
+      }
+      @media(max-width:768px){
+        .bento{grid-template-columns:repeat(2,1fr);grid-template-rows:auto;max-height:none;overflow-y:auto}
+        .bento-cell{min-height:100px}
+        .ind-card{flex:0 0 calc(50% - 8px)}
+        .rev-grid{grid-template-columns:1fr}
+        .fsec .container{padding:80px 0 20px}
+        .hero-stat-row{gap:24px}
+        .hero-stat-row .hs-item .hs-n{font-size:28px}
+      }
+      @media(max-width:576px){
+        .ind-card{flex:0 0 calc(85% - 8px)}
+        .cta-actions{flex-direction:column}
+        .btn-p,.btn-s{width:100%;justify-content:center}
+      }
+    </style>
+  </head>
+  <body>
+    <div id="dot"></div>
+    <div id="ring"></div>
+
+    <!-- Side Navigation -->
+    <div class="side-nav" id="sideNav">
+      <a href="#cHero" class="active" data-sec="0"><span class="tip">Overview</span></a>
+      <a href="#cTrust" data-sec="1"><span class="tip">Trusted By</span></a>
+      <a href="#cFeatured" data-sec="2"><span class="tip">Featured</span></a>
+      <a href="#cIndustries" data-sec="3"><span class="tip">Industries</span></a>
+      <a href="#cMore" data-sec="4"><span class="tip">Reviews</span></a>
+      <a href="#cCta" data-sec="5"><span class="tip">Contact</span></a>
+    </div>
+
+    <!-- NAVBAR -->
+    <nav id="nav">
+      <div class="bar">
+        <a class="logo" href="index.html"><img src="logo2-removebg-preview (1).png" alt="" /></a>
+        <div class="nav-menu">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="services.html">Services</a>
+          <a href="portfolio.html">Projects</a>
+          <a href="testimonials.html" class="cur">Clients</a>
+          <a href="contact.html" class="nav-btn">Contact Us</a>
+        </div>
+        <button class="burger" id="burg"><span></span><span></span><span></span></button>
+      </div>
+      <div class="mob-nav" id="mobNav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="portfolio.html">Projects</a>
+        <a href="testimonials.html">Clients</a>
+        <a href="contact.html" class="mob-btn">Contact Us →</a>
+      </div>
+    </nav>
+
+    <!-- HERO -->
+    <section id="cHero" class="fsec">
+      <div class="hero-grid"></div>
+      <div class="diagonal-line"></div>
+      <div class="diagonal-accent"></div>
+      <div class="hero-img-cluster">
+        <div class="himg himg-1"><img src="hacker-girl-with-her-team-stealing-online-information-using-super-computers.webp" alt="" /></div>
+        <div class="himg himg-2"><img src="innovative-futuristic-classroom-students (1).webp" alt="" /></div>
+        <div class="himg himg-3"><img src="team-discussing-about-industrial-project-using-dual-monitors-setup-desing-d-gears-metalic-cla.jpg" alt="" /></div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-6" style="z-index:5">
+            <div class="ch-badge rv"><i class="bi bi-buildings"></i> Our Clients & Partners</div>
+            <h1 class="ch-title rv d1"><span class="thin">They Trust</span><br/>Us To <span class="acc">Deliver.</span></h1>
+            <p class="ch-sub rv d2">From government entities to Fortune 500 enterprises — we've helped over 150 organizations across the GCC transform their digital landscape.</p>
+            <div class="hero-stat-row rv d3">
+              <div class="hs-item"><div class="hs-n">150+</div><div class="hs-l">Clients</div></div>
+              <div class="hs-item"><div class="hs-n">12</div><div class="hs-l">Industries</div></div>
+              <div class="hs-item"><div class="hs-n">99%</div><div class="hs-l">Retention</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TRUSTED BY -->
+    <section id="cTrust" class="fsec">
+      <div class="container">
+        <div class="rv" style="margin-bottom:20px">
+          <div class="sec-tag">Trusted By</div>
+          <div class="sec-h">Powering <span>Industry Leaders</span></div>
+        </div>
+        <div class="bento rv d1">
+          <div class="bento-cell span2">
+            <div class="bc-img"><img src="colleagues-office-talking-with-each-other-using-computer.webp" alt="" /></div>
+            <div class="bc-logo">Gulf <span>Finance</span> Bank</div>
+            <div class="bc-tag">Banking & Finance</div>
+          </div>
+          <div class="bento-cell"><div class="bc-logo">Al <span>Dana</span></div><div class="bc-tag">Real Estate</div></div>
+          <div class="bento-cell"><div class="bc-logo">Medi<span>Care</span></div><div class="bc-tag">Healthcare</div></div>
+          <div class="bento-cell"><div class="bc-logo">Trans<span>Gulf</span></div><div class="bc-tag">Logistics</div></div>
+          <div class="bento-cell row2">
+            <div class="bc-img"><img src="modern-business-center.webp" alt="" /></div>
+            <div class="bc-icon"><i class="bi bi-building"></i></div>
+            <div class="bc-logo">Smart <span>Manama</span></div>
+            <div class="bc-tag">Government · Smart City</div>
+          </div>
+          <div class="bento-cell"><div class="bc-logo">Urban<span>Fashion</span></div><div class="bc-tag">Retail</div></div>
+          <div class="bento-cell"><div class="bc-logo">Petro<span>Tech</span></div><div class="bc-tag">Oil & Gas</div></div>
+          <div class="bento-cell"><div class="bc-logo">Edu<span>Net</span></div><div class="bc-tag">Education</div></div>
+          <div class="bento-cell"><div class="bc-logo">Mega<span>Mart</span></div><div class="bc-tag">E-Commerce</div></div>
+          <div class="bento-cell span2">
+            <div class="bc-img"><img src="hacker-girl-with-her-team-stealing-online-information-using-super-computers.webp" alt="" /></div>
+            <div class="bc-logo">National <span>Telecom</span> Co.</div>
+            <div class="bc-tag">Telecommunications</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FEATURED TESTIMONIAL -->
+    <section id="cFeatured" class="fsec">
+      <div class="feat-bg"><img src="team-discussing-about-industrial-project-using-dual-monitors-setup-desing-d-gears-metalic-cla.jpg" alt="" /></div>
+      <div class="container">
+        <div class="feat-content rv" id="featContent">
+          <div class="feat-quot">"</div>
+          <p class="feat-text" id="featText">JSONTECH didn't just deliver a product — they delivered a <strong>competitive advantage.</strong> Their cloud migration strategy saved us millions and their team felt like an extension of our own.</p>
+          <div class="feat-author" id="featAuthor">
+            <div class="feat-avatar" id="featAv">FA</div>
+            <div class="feat-author-info">
+              <div class="fa-name" id="featName">Faisal Al-Rahman</div>
+              <div class="fa-role" id="featRole">CTO, Gulf Finance Bank</div>
+            </div>
+          </div>
+          <div class="feat-nav">
+            <button id="featPrev"><i class="bi bi-arrow-left"></i></button>
+            <button id="featNext"><i class="bi bi-arrow-right"></i></button>
+            <span class="feat-counter"><b id="featCur">01</b> / 04</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- INDUSTRIES -->
+    <section id="cIndustries" class="fsec">
+      <div class="container">
+        <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:16px" class="rv">
+          <div>
+            <div class="sec-tag">Industries We Serve</div>
+            <div class="sec-h">Cross-Sector <span>Expertise</span></div>
+          </div>
+          <div style="display:flex;gap:8px">
+            <button class="ind-scroll-btn" id="indPrev"><i class="bi bi-arrow-left"></i></button>
+            <button class="ind-scroll-btn" id="indNext"><i class="bi bi-arrow-right"></i></button>
+          </div>
+        </div>
+        <div class="ind-strip rv d1" id="indStrip">
+          <div class="ind-card">
+            <div class="ind-card-img"><img src="https://images.unsplash.com/photo-1563986768609-322da13575f3?w=500&q=75" alt="" /></div>
+            <div class="ind-card-body">
+              <div class="ind-icon"><i class="bi bi-shield-lock"></i></div>
+              <h4>Banking & Finance</h4>
+              <p>Secure, compliant solutions for financial institutions</p>
+              <div class="ind-count">28+ Projects</div>
+            </div>
+          </div>
+          <div class="ind-card">
+            <div class="ind-card-img"><img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=500&q=75" alt="" /></div>
+            <div class="ind-card-body">
+              <div class="ind-icon"><i class="bi bi-heart-pulse"></i></div>
+              <h4>Healthcare</h4>
+              <p>Digital health platforms and patient management systems</p>
+              <div class="ind-count">22+ Projects</div>
+            </div>
+          </div>
+          <div class="ind-card">
+            <div class="ind-card-img"><img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=500&q=75" alt="" /></div>
+            <div class="ind-card-body">
+              <div class="ind-icon"><i class="bi bi-building"></i></div>
+              <h4>Government</h4>
+              <p>Smart city infrastructure and e-governance platforms</p>
+              <div class="ind-count">18+ Projects</div>
+            </div>
+          </div>
+          <div class="ind-card">
+            <div class="ind-card-img"><img src="modern-business-center.webp" alt="" /></div>
+            <div class="ind-card-body">
+              <div class="ind-icon"><i class="bi bi-truck"></i></div>
+              <h4>Logistics</h4>
+              <p>Fleet tracking, warehouse automation, and supply chain</p>
+              <div class="ind-count">15+ Projects</div>
+            </div>
+          </div>
+          <div class="ind-card">
+            <div class="ind-card-img"><img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=500&q=75" alt="" /></div>
+            <div class="ind-card-body">
+              <div class="ind-icon"><i class="bi bi-bag"></i></div>
+              <h4>Retail & E-Commerce</h4>
+              <p>Omnichannel platforms and POS integrations</p>
+              <div class="ind-count">32+ Projects</div>
+            </div>
+          </div>
+          <div class="ind-card">
+            <div class="ind-card-img"><img src="https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=500&q=75" alt="" /></div>
+            <div class="ind-card-body">
+              <div class="ind-icon"><i class="bi bi-fuel-pump"></i></div>
+              <h4>Oil & Energy</h4>
+              <p>IoT monitoring and industrial automation systems</p>
+              <div class="ind-count">12+ Projects</div>
+            </div>
+          </div>
+          <div class="ind-card">
+            <div class="ind-card-img"><img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=500&q=75" alt="" /></div>
+            <div class="ind-card-body">
+              <div class="ind-icon"><i class="bi bi-mortarboard"></i></div>
+              <h4>Education</h4>
+              <p>LMS platforms and virtual classroom solutions</p>
+              <div class="ind-count">10+ Projects</div>
+            </div>
+          </div>
+          <div class="ind-card">
+            <div class="ind-card-img"><img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=500&q=75" alt="" /></div>
+            <div class="ind-card-body">
+              <div class="ind-icon"><i class="bi bi-telephone"></i></div>
+              <h4>Telecom</h4>
+              <p>Network management and customer experience platforms</p>
+              <div class="ind-count">8+ Projects</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- REVIEWS — 3 Clean Cards -->
+    <section id="cMore" class="fsec">
+      <div class="container">
+        <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:18px" class="rv">
+          <div>
+            <div class="sec-tag">Client Reviews</div>
+            <div class="sec-h">What They <span>Say About Us</span></div>
+          </div>
+          <p class="sec-lead" style="text-align:right;max-width:320px">Real feedback from real partnerships that delivered measurable results.</p>
+        </div>
+        <div class="rev-grid rv d1">
+          <div class="rev-card">
+            <div class="rc-top">
+              <div class="rc-stars">★★★★★</div>
+              <div class="rc-ico">"</div>
+            </div>
+            <p class="rc-text">"Their team didn't just build our platform — they reimagined our entire digital strategy. Revenue increased by 65% within the first year."</p>
+            <div class="rc-author">
+              <div class="rc-av">SH</div>
+              <div>
+                <div class="rc-name">Sarah Hassan</div>
+                <div class="rc-role">CEO, Urban Fashion Group</div>
+              </div>
+            </div>
+          </div>
+          <div class="rev-card">
+            <div class="rc-top">
+              <div class="rc-stars">★★★★★</div>
+              <div class="rc-ico">"</div>
+            </div>
+            <p class="rc-text">"Professional, responsive, and technically brilliant. The cybersecurity audit identified vulnerabilities we didn't even know existed."</p>
+            <div class="rc-author">
+              <div class="rc-av">PK</div>
+              <div>
+                <div class="rc-name">Sir Parshant Kumar</div>
+                <div class="rc-role">IT Manager, PetroTech</div>
+              </div>
+            </div>
+          </div>
+          <div class="rev-card">
+            <div class="rc-top">
+              <div class="rc-stars">★★★★★</div>
+              <div class="rc-ico">"</div>
+            </div>
+            <p class="rc-text">"We've worked with global consultancies before, but JSONTECH offers something rare — local insight with world-class technical capability."</p>
+            <div class="rc-author">
+              <div class="rc-av">KA</div>
+              <div>
+                <div class="rc-name">Khalid Al-Khalifa</div>
+                <div class="rc-role">VP Technology, National Telecom</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section id="cCta" class="fsec">
+      <div class="container">
+        <div class="cta-split rv">
+          <div class="cta-left">
+            <div class="cta-tag">Start Your Journey</div>
+            <h2 class="cta-heading">Ready To Join Our <span>Growing List</span> Of Success Stories?</h2>
+            <p class="cta-desc">Let's discuss how JSONTECH can transform your business with tailored technology solutions. Your success story starts with a conversation.</p>
+            <div class="cta-actions">
+              <a href="mailto:info@jsontechs.com" class="btn-p">Get a Free Consultation <i class="bi bi-arrow-right"></i></a>
+              <a href="tel:+97333546555" class="btn-s"><i class="bi bi-telephone"></i> Call Us Now</a>
+            </div>
+            <p class="cta-note">Or email: <a href="mailto:info@jsontechs.com">info@jsontechs.com</a></p>
+          </div>
+          <div class="cta-right">
+            <img src="https://images.unsplash.com/photo-1556761175-4b46a572b786?w=800&q=85" alt="Team Meeting" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="container">
+        <div class="row g-5">
+          <div class="col-lg-4 col-md-6">
+            <a class="logo" href="#"><img src="logo2-removebg-preview (1).png" alt="" /></a>
+            <p class="f-desc">JSONTECH is a leading IT solutions provider based in Bahrain, committed to driving digital transformation and technological excellence for businesses across the GCC.</p>
+            <div class="fsoc">
+              <a href="#" class="fsl"><i class="bi bi-linkedin"></i></a>
+              <a href="#" class="fsl"><i class="bi bi-twitter-x"></i></a>
+              <a href="#" class="fsl"><i class="bi bi-instagram"></i></a>
+              <a href="#" class="fsl"><i class="bi bi-facebook"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-2 col-md-6">
+            <div class="fh">Company</div>
+            <ul class="fl">
+              <li><a href="about.html">About Us</a></li>
+              <li><a href="services.html">Services</a></li>
+              <li><a href="portfolio.html">Case Studies</a></li>
+              <li><a href="#">Careers</a></li>
+              <li><a href="#">Blog</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="fh">Solutions</div>
+            <ul class="fl">
+              <li><a href="#">Custom Software</a></li>
+              <li><a href="#">Cloud Services</a></li>
+              <li><a href="#">Cyber Security</a></li>
+              <li><a href="#">Data Analytics</a></li>
+              <li><a href="#">IT Consulting</a></li>
+            </ul>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="fh">Contact</div>
+            <div class="fcr"><div class="fci"><i class="bi bi-geo-alt"></i></div><p>Manama, Kingdom of Bahrain</p></div>
+            <div class="fcr"><div class="fci"><i class="bi bi-envelope"></i></div><p><a href="mailto:info@jsontechs.com">info@jsontechs.com</a></p></div>
+            <div class="fcr"><div class="fci"><i class="bi bi-telephone"></i></div><p><a href="tel:+97333546555">+973 33 546 555</a></p></div>
+          </div>
+        </div>
+        <div class="fbot">
+          <p>&copy; 2024 <span>JSONTECH</span>. All rights reserved.</p>
+          <p>Engineered for Excellence</p>
+        </div>
+      </div>
+    </footer>
+
+    <button id="btt" onclick="scrollTo({top:0,behavior:'smooth'})"><i class="bi bi-arrow-up"></i></button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      /* Cursor */
+      const dot=document.getElementById("dot"),ring=document.getElementById("ring");
+      document.addEventListener("mousemove",e=>{dot.style.left=e.clientX+"px";dot.style.top=e.clientY+"px";ring.style.left=e.clientX+"px";ring.style.top=e.clientY+"px"});
+      document.querySelectorAll("a,button,.bento-cell,.ind-card,.rev-card,.side-nav a").forEach(el=>{
+        el.addEventListener("mouseenter",()=>{dot.style.transform="translate(-50%,-50%) scale(2.2)";ring.style.opacity=".8"});
+        el.addEventListener("mouseleave",()=>{dot.style.transform="translate(-50%,-50%) scale(1)";ring.style.opacity=".4"})
+      });
+
+      /* Navbar */
+      const navEl=document.getElementById("nav");
+      window.addEventListener("scroll",()=>{navEl.classList.toggle("stuck",scrollY>55);document.getElementById("btt").classList.toggle("show",scrollY>380);updateSideNav()});
+      const burg=document.getElementById("burg"),mobNav=document.getElementById("mobNav");
+      burg.onclick=()=>{burg.classList.toggle("open");mobNav.classList.toggle("open")};
+      mobNav.querySelectorAll("a").forEach(a=>a.onclick=()=>{burg.classList.remove("open");mobNav.classList.remove("open")});
+
+      /* Side Nav */
+      const sections=document.querySelectorAll(".fsec");
+      const sideLinks=document.querySelectorAll(".side-nav a");
+      function updateSideNav(){let c=0;sections.forEach((s,i)=>{if(scrollY>=s.offsetTop-200)c=i});sideLinks.forEach((l,i)=>l.classList.toggle("active",i===c))}
+      sideLinks.forEach(l=>l.addEventListener("click",e=>{e.preventDefault();const t=document.querySelector(l.getAttribute("href"));if(t)t.scrollIntoView({behavior:"smooth"})}));
+
+      /* Featured Carousel */
+      const featData=[
+        {text:'JSONTECH didn\'t just deliver a product — they delivered a <strong>competitive advantage.</strong> Their cloud migration strategy saved us millions and their team felt like an extension of our own.',av:"FA",name:"Faisal Al-Rahman",role:"CTO, Gulf Finance Bank"},
+        {text:'From legacy systems to a fully modern platform in just 6 months. JSONTECH\'s <strong>agile approach</strong> and technical depth are unmatched in the GCC region.',av:"NA",name:"Noor Al-Ansari",role:"COO, HealthFirst Bahrain"},
+        {text:'The smart city portal handles <strong>3 million+ interactions monthly</strong> with zero downtime. Their architecture decisions were spot-on from day one.',av:"MA",name:"Mohammed Al-Ali",role:"Director, Smart Manama Initiative"},
+        {text:'We\'ve partnered with global firms before, but JSONTECH offers something rare — <strong>local insight with global standards.</strong> They understand our market like nobody else.',av:"KA",name:"Khalid Al-Khalifa",role:"VP Technology, National Telecom Co."}
+      ];
+      let featI=0;
+      function goFeat(i){featI=(i+featData.length)%featData.length;const d=featData[featI];const c=document.getElementById("featContent");c.style.opacity="0";c.style.transform="translateY(16px)";setTimeout(()=>{document.getElementById("featText").innerHTML=d.text;document.getElementById("featAv").textContent=d.av;document.getElementById("featName").textContent=d.name;document.getElementById("featRole").textContent=d.role;document.getElementById("featCur").textContent=String(featI+1).padStart(2,"0");c.style.opacity="1";c.style.transform="none"},300)}
+      document.getElementById("featContent").style.transition="opacity .35s, transform .35s";
+      document.getElementById("featNext").onclick=()=>goFeat(featI+1);
+      document.getElementById("featPrev").onclick=()=>goFeat(featI-1);
+      setInterval(()=>goFeat(featI+1),6000);
+
+      /* Industries Scroll */
+      const indStrip=document.getElementById("indStrip");
+      let indPos=0;
+      function getIndStep(){const c=indStrip.querySelector(".ind-card");if(!c)return 300;return c.offsetWidth+16}
+      document.getElementById("indNext").onclick=()=>{const s=getIndStep();const m=indStrip.scrollWidth-indStrip.offsetWidth;indPos=Math.min(indPos+s,m);indStrip.style.transform=`translateX(-${indPos}px)`;indStrip.style.transition="transform .45s cubic-bezier(.25,.46,.45,.94)"};
+      document.getElementById("indPrev").onclick=()=>{const s=getIndStep();indPos=Math.max(indPos-s,0);indStrip.style.transform=`translateX(-${indPos}px)`;indStrip.style.transition="transform .45s cubic-bezier(.25,.46,.45,.94)"};
+
+      /* Reveal */
+      const ro=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");ro.unobserve(e.target)}})},{threshold:0.1});
+      document.querySelectorAll(".rv").forEach(el=>ro.observe(el));
+    </script>
+  </body>
+</html>

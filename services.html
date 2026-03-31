@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Services — JSONTECH | Enterprise IT Solutions Bahrain</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet" />
+    <style>
+      :root{--g:#3b82f6;--g2:#60a5fa;--g3:#1d4ed8;--glow:rgba(59,130,246,.16);--d1:#07070a;--d2:#0d0d12;--d3:#131319;--d4:#1a1a23;--d5:#21212d;--t1:#edebe5;--t2:#a09e99;--t3:#5e5e6e;--br:rgba(59,130,246,.13);--brh:rgba(59,130,246,.4);--r:14px}
+      *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+      html{scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:var(--g) var(--d1)}
+      body{font-family:"Plus Jakarta Sans",sans-serif;font-size:15px;line-height:1.65;background:var(--d1);color:var(--t1);overflow-x:hidden;cursor:none}
+      img{display:block;max-width:100%}a{text-decoration:none}
+      ::-webkit-scrollbar{width:3px}::-webkit-scrollbar-thumb{background:var(--g);border-radius:2px}
+
+      #dot{position:fixed;width:8px;height:8px;background:var(--g);border-radius:50%;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .1s}
+      #ring{position:fixed;width:30px;height:30px;border:1.5px solid var(--g);border-radius:50%;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);opacity:.4;transition:left .12s,top .12s,opacity .2s}
+
+      #nav{position:fixed;top:0;left:0;width:100%;z-index:800;transition:all .35s}
+      #nav .bar{display:flex;align-items:center;max-width:1280px;margin:0 auto;padding:12px 40px;transition:all .35s}
+      #nav.stuck .bar{padding:10px 40px;background:rgba(7,7,10,.95);backdrop-filter:blur(24px);border-bottom:1px solid var(--br)}
+      .logo{display:flex;align-items:center;gap:12px;flex-shrink:0;margin-right:30px!important}
+      .logo img{height:120px;width:auto;object-fit:contain;transition:all .3s ease}
+      #nav.stuck .logo img{height:90px}
+      .nav-menu{display:flex;align-items:center;gap:2px;margin-left:30px!important}
+      .nav-menu a{font-size:13px;font-weight:500;color:var(--t2);padding:7px 14px;border-radius:7px;letter-spacing:0.4px;transition:color .2s,background .2s}
+      .nav-menu a:hover,.nav-menu a.cur{color:var(--g);background:var(--glow)}
+      .nav-btn{margin-left:10px;background:linear-gradient(135deg,var(--g2),var(--g3));color:#fff!important;font-family:"Outfit",sans-serif;font-weight:700;font-size:12.5px;letter-spacing:0.3px;padding:9px 22px;border-radius:8px;box-shadow:0 4px 18px rgba(59,130,246,.28);transition:opacity .2s,transform .2s}
+      .nav-btn:hover{opacity:.85;transform:translateY(-1px)}
+
+      .burger{display:none;flex-direction:column;gap:5px;cursor:pointer;margin-left:auto;border:none;background:none;padding:4px}
+      .burger span{display:block;width:22px;height:2px;background:var(--g);border-radius:2px;transition:all .28s}
+      .burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg)}
+      .burger.open span:nth-child(2){opacity:0}
+      .burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg)}
+      .mob-nav{display:none;flex-direction:column;gap:2px;background:var(--d3);border-top:1px solid var(--br);padding:12px 22px 18px}
+      .mob-nav.open{display:flex}
+      .mob-nav a{font-size:15px;font-weight:500;color:var(--t2);padding:10px 12px;border-radius:7px;transition:color .2s,background .2s}
+      .mob-nav a:hover{color:var(--g);background:var(--glow)}
+      .mob-nav .mob-btn{background:linear-gradient(135deg,var(--g2),var(--g3));color:#fff!important;font-family:"Outfit",sans-serif;font-weight:700;text-align:center;margin-top:6px;border-radius:8px}
+      @media(max-width:880px){.nav-menu{display:none}.burger{display:flex}.bar{padding:12px 20px!important}.logo img{height:120px}#nav.stuck .logo img{height:90px}}
+
+      .frm{min-height:100vh;overflow:hidden;position:relative;display:flex;align-items:center}
+
+      .slider{position:relative;width:100%;height:100vh}
+      .slide{position:absolute;inset:0;opacity:0;transition:opacity 1s ease;z-index:0}
+      .slide.active{opacity:1;z-index:1}
+      .slide img{width:100%;height:100%;object-fit:cover}
+      .slide::after{content:"";position:absolute;inset:0;background:linear-gradient(108deg,rgba(7,7,10,.96) 15%,rgba(7,7,10,.6) 50%,rgba(7,7,10,.25) 100%)}
+      .slider-grid{position:absolute;inset:0;z-index:2;pointer-events:none;background-image:linear-gradient(rgba(59,130,246,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(59,130,246,.025) 1px,transparent 1px);background-size:60px 60px}
+      .slider-orb{position:absolute;top:-10%;right:-5%;width:600px;height:600px;background:radial-gradient(circle,rgba(59,130,246,.14) 0%,transparent 60%);border-radius:50%;z-index:1;animation:orb 8s ease-in-out infinite}
+      @keyframes orb{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+      .slider-content{position:absolute;inset:0;z-index:5;display:flex;align-items:center;padding-top:80px}
+      .sl-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:11px;font-weight:600;letter-spacing:3.5px;text-transform:uppercase;color:var(--g);margin-bottom:14px}
+      .sl-eyebrow::before{content:"";width:26px;height:1.5px;background:var(--g)}
+      .sl-title{font-family:"Outfit",sans-serif;font-size:clamp(36px,6vw,76px);font-weight:900;line-height:1.03;letter-spacing:-2.5px;color:var(--t1);margin-bottom:16px}
+      .sl-title .gc{color:var(--g)}
+      .sl-sub{font-size:15px;line-height:1.8;color:var(--t2);max-width:520px;margin-bottom:8px}
+      .sl-stats{display:flex;gap:24px;margin-top:24px;flex-wrap:wrap}
+      .sl-stat{display:flex;align-items:center;gap:10px}
+      .sl-stat-ic{width:38px;height:38px;border-radius:9px;background:rgba(59,130,246,.12);border:1px solid var(--br);display:flex;align-items:center;justify-content:center;color:var(--g);font-size:16px}
+      .sl-stat-n{font-family:"Outfit",sans-serif;font-size:20px;font-weight:800;color:var(--t1);line-height:1}
+      .sl-stat-l{font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:.8px}
+      .slider-dots{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);z-index:10;display:flex;gap:10px}
+      .sdot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.2);border:1.5px solid rgba(255,255,255,.3);cursor:pointer;transition:all .3s}
+      .sdot.active{background:var(--g);border-color:var(--g);box-shadow:0 0 12px rgba(59,130,246,.5)}
+      .sl-bread{display:flex;align-items:center;gap:8px;margin-top:24px;font-size:13px;color:var(--t3)}
+      .sl-bread a{color:var(--t2);transition:color .2s}.sl-bread a:hover{color:var(--g)}.sl-bread span{color:var(--g)}
+
+      .tag{display:inline-flex;align-items:center;gap:9px;font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--g);margin-bottom:8px}
+      .tag::before{content:"";width:18px;height:1.5px;background:var(--g)}
+      .h2{font-family:"Outfit",sans-serif;font-size:clamp(22px,3vw,36px);font-weight:800;letter-spacing:-1px;color:var(--t1);line-height:1.12;margin-bottom:6px}
+      .h2 span{color:var(--g)}
+      .lead{font-size:13.5px;line-height:1.7;color:var(--t2);margin-bottom:.5rem}
+
+      .full-hero{position:relative;min-height:100vh;overflow:hidden;display:flex;align-items:center}
+      .full-hero .bg{position:absolute;inset:0}
+      .full-hero .bg img{width:100%;height:100%;object-fit:cover;filter:brightness(.35)}
+      .full-hero .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,7,10,.4) 0%,rgba(7,7,10,.7) 50%,rgba(7,7,10,.95) 100%)}
+      .full-hero .inner{position:relative;z-index:2;width:100%}
+      .full-hero .svc-num{font-family:"Outfit",sans-serif;font-size:clamp(60px,10vw,120px);font-weight:900;color:rgba(59,130,246,.08);line-height:1;position:absolute;right:40px;top:50%;transform:translateY(-50%);pointer-events:none}
+
+      .feat-row{display:flex;gap:14px;padding:14px 18px;background:var(--d3);border:1px solid var(--br);border-radius:10px;transition:all .3s;align-items:flex-start}
+      .feat-row:hover{border-color:var(--brh);transform:translateX(4px)}
+      .feat-row .fi{width:36px;height:36px;border-radius:9px;background:rgba(59,130,246,.1);border:1px solid var(--br);display:flex;align-items:center;justify-content:center;color:var(--g);font-size:16px;flex-shrink:0;transition:all .3s}
+      .feat-row:hover .fi{background:var(--g);color:#fff;border-color:var(--g)}
+      .feat-row .ft{flex:1}
+      .feat-row .ft h6{font-family:"Outfit",sans-serif;font-size:13px;font-weight:700;color:var(--t1);margin-bottom:2px}
+      .feat-row .ft p{font-size:11px;color:var(--t3);line-height:1.5;margin:0}
+
+      .del-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+      .del-card{background:var(--d3);border:1px solid var(--br);border-radius:12px;padding:22px 18px;text-align:center;transition:all .4s;position:relative;overflow:hidden}
+      .del-card::before{content:"";position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--g2),var(--g3));opacity:0;transition:opacity .3s}
+      .del-card:hover{border-color:var(--brh);transform:translateY(-4px);box-shadow:0 10px 30px rgba(59,130,246,.08)}
+      .del-card:hover::before{opacity:1}
+      .del-card .dc-icon{width:50px;height:50px;border-radius:13px;background:rgba(59,130,246,.1);border:1px solid var(--br);display:flex;align-items:center;justify-content:center;color:var(--g);font-size:22px;margin:0 auto 14px;transition:all .3s}
+      .del-card:hover .dc-icon{background:var(--g);color:#fff;border-color:var(--g);transform:scale(1.08)}
+      .del-card h5{font-family:"Outfit",sans-serif;font-size:14px;font-weight:700;color:var(--t1);margin-bottom:6px}
+      .del-card p{font-size:11px;color:var(--t3);line-height:1.55;margin:0}
+
+      .stat-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+      .stat-box{text-align:center;padding:22px 14px;background:var(--d3);border:1px solid var(--br);border-radius:12px;position:relative;overflow:hidden}
+      .stat-box::after{content:"";position:absolute;bottom:0;left:20%;right:20%;height:2px;background:var(--g);border-radius:2px;opacity:.3}
+      .stat-box .sn{font-family:"Outfit",sans-serif;font-size:clamp(28px,4vw,42px);font-weight:900;color:var(--g);line-height:1}
+      .stat-box .sl2{font-size:10px;color:var(--t3);text-transform:uppercase;letter-spacing:1.2px;margin-top:4px}
+
+      .ind-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+      .ind-card{background:var(--d3);border:1px solid var(--br);border-radius:12px;padding:20px 16px;transition:all .3s;text-align:center}
+      .ind-card:hover{border-color:var(--brh);transform:translateY(-3px)}
+      .ind-card .ic-icon{font-size:28px;color:var(--g);margin-bottom:8px}
+      .ind-card h6{font-family:"Outfit",sans-serif;font-size:12.5px;font-weight:700;color:var(--t1);margin-bottom:3px}
+      .ind-card p{font-size:10px;color:var(--t3);line-height:1.4;margin:0}
+
+      .tech-hero{position:relative;overflow:hidden;border-radius:18px;border:1px solid var(--br);margin-bottom:20px}
+      .tech-hero img{width:100%;height:260px;object-fit:cover;display:block}
+      .tech-hero::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,var(--d2) 8%,rgba(13,13,18,.5) 50%,rgba(13,13,18,.2) 100%)}
+      .tech-hero-content{position:absolute;bottom:0;left:0;right:0;z-index:2;padding:28px 30px}
+      .tech-hero-content h3{font-family:"Outfit",sans-serif;font-size:clamp(20px,3vw,30px);font-weight:900;letter-spacing:-1px;color:var(--t1);margin-bottom:4px}
+      .tech-hero-content h3 span{color:var(--g)}
+      .tech-hero-content p{font-size:12.5px;color:var(--t2);margin:0;max-width:520px}
+
+      .tech-cat-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+      .tech-cat-card{position:relative;overflow:hidden;border-radius:14px;border:1px solid var(--br);transition:all .4s;cursor:default;min-height:200px}
+      .tech-cat-card:hover{border-color:var(--brh);transform:translateY(-3px);box-shadow:0 12px 36px rgba(59,130,246,.1)}
+      .tech-cat-card img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0;transition:transform .6s}
+      .tech-cat-card:hover img{transform:scale(1.06)}
+      .tech-cat-card .tcc-overlay{position:absolute;inset:0;background:linear-gradient(135deg,rgba(7,7,10,.88) 30%,rgba(7,7,10,.65) 100%);z-index:1}
+      .tech-cat-card .tcc-body{position:relative;z-index:2;padding:22px 20px;height:100%;display:flex;flex-direction:column;justify-content:flex-end}
+      .tcc-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(59,130,246,.15);border:1px solid rgba(59,130,246,.25);backdrop-filter:blur(8px);border-radius:6px;padding:4px 10px;font-size:9.5px;font-weight:700;color:var(--g);letter-spacing:1.5px;text-transform:uppercase;width:fit-content;margin-bottom:10px}
+      .tcc-body h5{font-family:"Outfit",sans-serif;font-size:16px;font-weight:800;color:var(--t1);margin-bottom:8px}
+      .tcc-pills{display:flex;flex-wrap:wrap;gap:6px}
+      .tcc-pill{font-size:10.5px;font-weight:500;color:var(--t2);background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);padding:4px 10px;border-radius:5px;transition:all .25s;white-space:nowrap}
+      .tech-cat-card:hover .tcc-pill{border-color:rgba(59,130,246,.25);color:var(--t1)}
+
+      .proc-visual{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:center}
+      .proc-img-wrap{position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--br);aspect-ratio:4/3}
+      .proc-img-wrap img{width:100%;height:100%;object-fit:cover}
+      .proc-img-wrap::after{content:"";position:absolute;inset:0;background:linear-gradient(135deg,rgba(7,7,10,.5) 0%,transparent 60%)}
+      .proc-img-badge{position:absolute;top:16px;left:16px;z-index:2;background:rgba(59,130,246,.18);border:1px solid rgba(59,130,246,.3);backdrop-filter:blur(10px);border-radius:10px;padding:8px 14px;display:flex;align-items:center;gap:8px}
+      .proc-img-badge i{color:var(--g);font-size:18px}
+      .proc-img-badge span{font-family:"Outfit",sans-serif;font-size:11px;font-weight:700;color:var(--t1);letter-spacing:1px;text-transform:uppercase}
+      .proc-steps-v{display:flex;flex-direction:column;gap:10px}
+      .proc-item{display:flex;gap:14px;align-items:flex-start;padding:14px 16px;background:var(--d3);border:1px solid var(--br);border-radius:10px;transition:all .3s}
+      .proc-item:hover{border-color:var(--brh);transform:translateX(4px)}
+      .proc-item .pi-num{font-family:"Outfit",sans-serif;font-size:24px;font-weight:900;color:rgba(59,130,246,.15);line-height:1;min-width:28px}
+      .proc-item .pi-icon{width:36px;height:36px;border-radius:9px;background:rgba(59,130,246,.1);border:1px solid var(--br);display:flex;align-items:center;justify-content:center;color:var(--g);font-size:15px;flex-shrink:0;transition:all .3s}
+      .proc-item:hover .pi-icon{background:var(--g);color:#fff;border-color:var(--g)}
+      .proc-item .pi-text h6{font-family:"Outfit",sans-serif;font-size:13px;font-weight:700;color:var(--t1);margin-bottom:1px}
+      .proc-item .pi-text p{font-size:10.5px;color:var(--t3);line-height:1.45;margin:0}
+
+      .proc-wrap{display:flex;gap:0;align-items:stretch;position:relative}
+      .proc-step{flex:1;background:var(--d3);border:1px solid var(--br);padding:24px 18px;text-align:center;transition:all .3s;position:relative}
+      .proc-step:first-child{border-radius:12px 0 0 12px}
+      .proc-step:last-child{border-radius:0 12px 12px 0}
+      .proc-step:not(:last-child){border-right:none}
+      .proc-step:hover{background:var(--d4);z-index:2}
+      .proc-step .ps-num{font-family:"Outfit",sans-serif;font-size:32px;font-weight:900;color:rgba(59,130,246,.1);line-height:1;margin-bottom:6px}
+      .proc-step .ps-icon{width:38px;height:38px;border-radius:9px;background:rgba(59,130,246,.1);border:1px solid var(--br);display:flex;align-items:center;justify-content:center;color:var(--g);font-size:17px;margin:0 auto 8px;transition:all .3s}
+      .proc-step:hover .ps-icon{background:var(--g);color:#fff;border-color:var(--g)}
+      .proc-step h6{font-family:"Outfit",sans-serif;font-size:12px;font-weight:700;color:var(--t1);margin-bottom:3px}
+      .proc-step p{font-size:10px;color:var(--t3);line-height:1.4;margin:0}
+
+      .consult-visual{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:center}
+      .consult-img{position:relative;border-radius:16px;overflow:hidden;border:1px solid var(--br);aspect-ratio:4/3}
+      .consult-img img{width:100%;height:100%;object-fit:cover}
+      .consult-img::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(7,7,10,.6) 0%,transparent 50%)}
+ #cta {
+        background: var(--d3);
+        position: relative;
+        overflow: hidden;
+      }
+      #cta::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: 
+          radial-gradient(ellipse at 15% 50%, rgba(59, 130, 246, 0.08) 0%, transparent 50%),
+          radial-gradient(ellipse at 85% 30%, rgba(59, 130, 246, 0.06) 0%, transparent 50%),
+          radial-gradient(ellipse at 50% 80%, rgba(59, 130, 246, 0.04) 0%, transparent 40%);
+        z-index: 0;
+      }
+      /* Animated corner lines */
+      #cta::after {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(90deg, transparent, var(--g), transparent);
+        z-index: 1;
+        animation: ctaLine 3s ease-in-out infinite;
+      }
+      @keyframes ctaLine {
+        0%, 100% { opacity: 0.3; }
+        50% { opacity: 1; }
+      }
+
+      #cta .container {
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+
+      .cta-box {
+        /* BOX PROPERTIES REMOVED — Full frame now */
+        border-radius: 0;
+        padding: 0;
+        text-align: center;
+        background: transparent;
+        border: none;
+        position: relative;
+        overflow: hidden;
+        max-width: none;
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 2;
+      }
+      .cta-box::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border-radius: 0;
+        background: linear-gradient(
+          135deg,
+          rgba(59, 130, 246, 0.06) 0%,
+          transparent 30%,
+          transparent 70%,
+          rgba(59, 130, 246, 0.04) 100%
+        );
+        z-index: 0;
+        pointer-events: none;
+      }
+      .cta-box > * {
+        position: relative;
+        z-index: 1;
+      }
+      .cta-h {
+        font-family: "Outfit", sans-serif;
+        font-size: clamp(28px, 5vw, 56px);
+        font-weight: 900;
+        letter-spacing: -2.5px;
+        margin-bottom: 16px;
+        color: var(--t1);
+        line-height: 1.05;
+      }
+      .cta-h span {
+        color: var(--g);
+      }
+      .cta-p {
+        font-size: 16px;
+        color: var(--t2);
+        margin-bottom: 36px;
+        max-width: 560px;
+        margin-inline: auto;
+        line-height: 1.7;
+      }
+      .cta-note {
+        font-size: 13px;
+        color: var(--t3);
+        margin-top: 20px;
+      }
+      .cta-note a {
+        color: var(--g);
+        transition: opacity 0.2s;
+      }
+      .cta-note a:hover {
+        opacity: 0.8;
+      }
+
+      /* Floating particles for CTA */
+      .cta-particle {
+        position: absolute;
+        width: 4px;
+        height: 4px;
+        background: var(--g);
+        border-radius: 50%;
+        opacity: 0;
+        animation: particleFloat 6s ease-in-out infinite;
+        pointer-events: none;
+        z-index: 0;
+      }
+      .cta-particle:nth-child(1) { left: 10%; top: 20%; animation-delay: 0s; }
+      .cta-particle:nth-child(2) { left: 25%; top: 70%; animation-delay: 1s; }
+      .cta-particle:nth-child(3) { left: 75%; top: 15%; animation-delay: 2s; }
+      .cta-particle:nth-child(4) { left: 85%; top: 65%; animation-delay: 0.5s; }
+      .cta-particle:nth-child(5) { left: 50%; top: 80%; animation-delay: 3s; }
+      .cta-particle:nth-child(6) { left: 15%; top: 50%; animation-delay: 1.5s; }
+      .cta-particle:nth-child(7) { left: 90%; top: 40%; animation-delay: 2.5s; }
+      .cta-particle:nth-child(8) { left: 40%; top: 10%; animation-delay: 4s; }
+      
+      @keyframes particleFloat {
+        0%, 100% { opacity: 0; transform: translateY(0) scale(1); }
+        25% { opacity: 0.6; }
+        50% { opacity: 0.3; transform: translateY(-30px) scale(1.5); }
+        75% { opacity: 0.5; }
+      }
+      footer{background:var(--d2);border-top:1px solid var(--br);height:auto;min-height:auto}
+      footer .container{padding:40px 0}
+      footer .logo img{height:100px;width:auto}
+      .f-desc{font-size:12.5px;color:var(--t3);line-height:1.8;margin:14px 0 20px}
+      .fsoc{display:flex;gap:7px}
+      .fsl{width:34px;height:34px;border-radius:7px;border:1px solid var(--br);background:transparent;display:flex;align-items:center;justify-content:center;color:var(--t3);font-size:14px;transition:all .25s}
+      .fsl:hover{border-color:var(--g);color:var(--g);background:var(--glow)}
+      .fh{font-family:"Outfit",sans-serif;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--t1);margin-bottom:18px;padding-bottom:10px;border-bottom:1px solid var(--br)}
+      .fl{list-style:none;padding:0}.fl li{margin-bottom:8px}
+      .fl a{font-size:13px;color:var(--t3);transition:color .22s,padding-left .22s}
+      .fl a:hover{color:var(--g);padding-left:4px}
+      .fcr{display:flex;align-items:flex-start;gap:10px;margin-bottom:12px}
+      .fci{width:30px;height:30px;border-radius:7px;flex-shrink:0;background:rgba(59,130,246,.07);border:1px solid var(--br);display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--g)}
+      .fcr p{font-size:12px;color:var(--t3);margin:0;line-height:1.6}
+      .fcr a{color:var(--t3);transition:color .2s}.fcr a:hover{color:var(--g)}
+      .fbot{border-top:1px solid var(--br);padding:18px 0;margin-top:40px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+      .fbot p{font-size:11.5px;color:var(--t3);margin:0}.fbot span{color:var(--g)}
+
+      .rv{opacity:0;transform:translateY(24px);transition:opacity .55s ease,transform .55s ease}
+      .rvl{opacity:0;transform:translateX(-24px);transition:opacity .55s ease,transform .55s ease}
+      .rvr{opacity:0;transform:translateX(24px);transition:opacity .55s ease,transform .55s ease}
+      .rv.in,.rvl.in,.rvr.in{opacity:1;transform:none}
+      .d1x{transition-delay:.1s}.d2x{transition-delay:.2s}.d3x{transition-delay:.3s}.d4x{transition-delay:.4s}.d5x{transition-delay:.5x}
+
+      #btt{position:fixed;bottom:24px;right:24px;z-index:600;width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,var(--g2),var(--g3));color:#fff;display:flex;align-items:center;justify-content:center;font-size:19px;cursor:pointer;opacity:0;transform:translateY(12px);transition:all .28s;border:none;box-shadow:0 7px 20px rgba(59,130,246,.35)}
+      #btt.show{opacity:1;transform:none}#btt:hover{transform:translateY(-3px)}
+
+      .tech-section{position:relative;overflow:hidden}
+      .tech-section::before{content:"";position:absolute;top:-100px;right:-100px;width:400px;height:400px;background:radial-gradient(circle,rgba(59,130,246,.06) 0%,transparent 70%);border-radius:50%;pointer-events:none}
+      .tech-section::after{content:"";position:absolute;bottom:-80px;left:-80px;width:300px;height:300px;background:radial-gradient(circle,rgba(59,130,246,.04) 0%,transparent 70%);border-radius:50%;pointer-events:none}
+
+      @media(max-width:992px){
+        .full-hero .svc-num{display:none}
+        .frm{height:auto;min-height:auto;overflow:visible}
+        .slider{height:100vh}
+        .del-grid{grid-template-columns:repeat(2,1fr)}
+        .stat-strip{grid-template-columns:repeat(2,1fr)}
+        .ind-grid{grid-template-columns:repeat(2,1fr)}
+        .proc-wrap{flex-direction:column}
+        .proc-step{border-radius:0!important}
+        .proc-step:not(:last-child){border-right:1px solid var(--br);border-bottom:none}
+        .proc-step:first-child{border-radius:12px 12px 0 0!important}
+        .proc-step:last-child{border-radius:0 0 12px 12px!important}
+        .tech-cat-grid{grid-template-columns:1fr}
+        .proc-visual{grid-template-columns:1fr}
+        .consult-visual{grid-template-columns:1fr}
+      }
+      @media(max-width:768px){
+        .logo img{height:120px}
+        .sl-stats{gap:14px}
+      }
+      @media(max-width:576px){
+        .btn-p,.btn-s{width:100%;justify-content:center}
+        .sl-stats{flex-direction:column;gap:10px}
+        .del-grid{grid-template-columns:1fr}
+        .stat-strip{grid-template-columns:1fr 1fr}
+        .ind-grid{grid-template-columns:1fr 1fr}
+      }
+    </style>
+  </head>
+  <body>
+    <div id="dot"></div>
+    <div id="ring"></div>
+
+    <!-- NAV -->
+    <nav id="nav">
+      <div class="bar">
+        <a class="logo" href="index.html"><img src="logo2-removebg-preview (1).png" alt="" /></a>
+        <div class="nav-menu">
+          <a href="index.html">Home</a>
+          <a href="about.html">About</a>
+          <a href="services.html" class="cur">Services</a>
+          <a href="portfolio.html">Projects</a>
+          <a href="testimonials.html">Clients</a>
+          <a href="contact.html" class="nav-btn">Contact Us</a>
+        </div>
+        <button class="burger" id="burg"><span></span><span></span><span></span></button>
+      </div>
+      <div class="mob-nav" id="mobNav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About</a>
+        <a href="services.html">Services</a>
+        <a href="portfolio.html">Projects</a>
+        <a href="testimonials.html">Clients</a>
+        <a href="contact.html" class="mob-btn">Contact Us →</a>
+      </div>
+    </nav>
+
+    <!-- ═══════════ HERO SLIDER ═══════════ -->
+    <section class="frm" style="height:100vh;">
+      <div class="slider">
+        <div class="slide active"><img src="colleagues-office-talking-with-each-other-using-computer.webp" alt="JSONTECH HQ" /></div>
+        <div class="slide"><img src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=1920&q=90" alt="Corporate Building" /></div>
+        <div class="slide"><img src="modern-business-center.webp" alt="Modern Facade" /></div>
+        <div class="slider-grid"></div>
+        <div class="slider-orb"></div>
+        <div class="slider-content">
+          <div class="container">
+            <div class="sl-eyebrow">What We Deliver</div>
+            <h1 class="sl-title">Services That <span class="gc">Scale</span></h1>
+            <p class="sl-sub">End-to-end technology solutions engineered for GCC enterprises — from ideation to production, from on-premise to cloud-native.</p>
+            <div class="sl-stats">
+              <div class="sl-stat"><div class="sl-stat-ic"><i class="bi bi-layers-fill"></i></div><div><div class="sl-stat-n">6</div><div class="sl-stat-l">Service Lines</div></div></div>
+              <div class="sl-stat"><div class="sl-stat-ic"><i class="bi bi-code-slash"></i></div><div><div class="sl-stat-n">50+</div><div class="sl-stat-l">Engineers</div></div></div>
+              <div class="sl-stat"><div class="sl-stat-ic"><i class="bi bi-arrow-repeat"></i></div><div><div class="sl-stat-n">99.9%</div><div class="sl-stat-l">Uptime SLA</div></div></div>
+            </div>
+            <div class="sl-bread"><a href="index.html">Home</a><i class="bi bi-chevron-right" style="font-size:10px"></i><span>Services</span></div>
+          </div>
+        </div>
+        <div class="slider-dots"><div class="sdot active" data-i="0"></div><div class="sdot" data-i="1"></div><div class="sdot" data-i="2"></div></div>
+      </div>
+    </section>
+
+    <!-- ═══════════ SERVICE OVERVIEW ═══════════ -->
+    <section class="frm" style="background:var(--d2);min-height:auto;padding:80px 0;">
+      <div class="container" style="max-width:1060px;">
+        <div class="text-center mb-4 rv">
+          <div class="tag" style="justify-content:center">At a Glance</div>
+          <h2 class="h2">Built for <span>Enterprise</span> Demands</h2>
+          <p class="lead" style="max-width:480px;margin-inline:auto;">Every service line backed by certified engineers and contractual accountability.</p>
+        </div>
+        <div class="stat-strip rv">
+          <div class="stat-box d1x"><div class="sn">200+</div><div class="sl2">Custom Apps Built</div></div>
+          <div class="stat-box d2x"><div class="sn">40+</div><div class="sl2">Cloud Migrations</div></div>
+          <div class="stat-box d3x"><div class="sn">0</div><div class="sl2">Security Breaches</div></div>
+          <div class="stat-box d4x"><div class="sn">4hrs</div><div class="sl2">Avg Response Time</div></div>
+        </div>
+        <div class="del-grid rv" style="margin-top:22px;">
+          <div class="del-card d1x">
+            <div class="dc-icon"><i class="bi bi-code-square"></i></div>
+            <h5>Custom Software</h5>
+            <p>Web apps, ERPs, portals & workflow automation.</p>
+          </div>
+          <div class="del-card d2x">
+            <div class="dc-icon"><i class="bi bi-cloud-fill"></i></div>
+            <h5>Cloud & DevOps</h5>
+            <p>AWS/Azure migrations, K8s & managed ops.</p>
+          </div>
+          <div class="del-card d3x">
+            <div class="dc-icon"><i class="bi bi-shield-lock-fill"></i></div>
+            <h5>Cybersecurity</h5>
+            <p>Pen-testing, SOC & GCC compliance.</p>
+          </div>
+          <div class="del-card d1x">
+            <div class="dc-icon"><i class="bi bi-bar-chart-line-fill"></i></div>
+            <h5>Data & AI</h5>
+            <p>BI dashboards, ML models & data pipelines.</p>
+          </div>
+          <div class="del-card d2x">
+            <div class="dc-icon"><i class="bi bi-phone-fill"></i></div>
+            <h5>Mobile Apps</h5>
+            <p>Flutter & React Native cross-platform apps.</p>
+          </div>
+          <div class="del-card d3x">
+            <div class="dc-icon"><i class="bi bi-diagram-3-fill"></i></div>
+            <h5>IT Consulting</h5>
+            <p>Digital roadmaps, CTO-as-a-Service & governance.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ CUSTOM SOFTWARE — FULL-BLEED ═══════════ -->
+    <section id="software" class="full-hero" style="background:var(--d1);">
+      <div class="bg"><img src="group-young-business-people-working-office.webp" alt="Code on Screen" /></div>
+      <div class="svc-num">01</div>
+      <div class="inner">
+        <div class="container" style="padding:100px 0;">
+          <div class="row g-4">
+            <div class="col-lg-5 rvl">
+              <div class="tag">Service 01</div>
+              <h2 class="h2">Custom Software <span>Development</span></h2>
+              <p class="lead" style="max-width:420px;">Tailored engineering that maps precisely to your workflows, data models, and compliance requirements.</p>
+              <a href="contact.html" class="btn-p" style="margin-top:12px;">Discuss Your Project <i class="bi bi-arrow-right"></i></a>
+            </div>
+            <div class="col-lg-7 rvr">
+              <div style="display:flex;flex-direction:column;gap:10px;">
+                <div class="feat-row d1x"><div class="fi"><i class="bi bi-globe2"></i></div><div class="ft"><h6>Enterprise Web Applications</h6><p>React, Angular & Vue.js SPAs with JWT auth and role-based dashboards.</p></div></div>
+                <div class="feat-row d2x"><div class="fi"><i class="bi bi-api"></i></div><div class="ft"><h6>API-First Back-Ends</h6><p>RESTful & GraphQL APIs on .NET Core, Node.js, or Python — load-tested.</p></div></div>
+                <div class="feat-row d3x"><div class="fi"><i class="bi bi-gear-wide-connected"></i></div><div class="ft"><h6>ERP & CRM Systems</h6><p>Inventory management, order processing, HR portals with multi-tenant architecture.</p></div></div>
+                <div class="feat-row d4x"><div class="fi"><i class="bi bi-database-gear"></i></div><div class="ft"><h6>Database Engineering</h6><p>PostgreSQL, MongoDB, Redis — schema design, query optimization & backup strategies.</p></div></div>
+                <div class="feat-row d5x"><div class="fi"><i class="bi bi-arrow-repeat"></i></div><div class="ft"><h6>Legacy Modernization</h6><p>Strangler fig migrations from monoliths to microservices — zero downtime.</p></div></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ CLOUD & DEVOPS ═══════════ -->
+    <section id="cloud" class="frm" style="background:var(--d2);min-height:auto;padding:80px 0;">
+      <div class="container" style="max-width:1060px;">
+        <div class="text-center mb-4 rv">
+          <div class="tag" style="justify-content:center">Service 02</div>
+          <h2 class="h2">Cloud & <span>DevOps</span></h2>
+          <p class="lead" style="max-width:500px;margin-inline:auto;">We re-architect for the cloud — optimizing cost, resilience, and deployment velocity.</p>
+        </div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;" class="rv">
+          <div style="position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--br);min-height:220px;" class="rvl d1x">
+            <img src="future-visions-business-technology-concept.webp" alt="Cloud Infrastructure" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" />
+            <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(7,7,10,.9) 20%,rgba(7,7,10,.6) 100%);z-index:1;"></div>
+            <div style="position:relative;z-index:2;padding:22px;height:100%;display:flex;flex-direction:column;justify-content:flex-end;">
+              <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+                <div style="width:36px;height:36px;border-radius:9px;background:rgba(59,130,246,.15);border:1px solid rgba(59,130,246,.3);display:flex;align-items:center;justify-content:center;color:var(--g);font-size:16px;"><i class="bi bi-cloud-arrow-up"></i></div>
+                <h6 style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:var(--t1);margin:0;">Cloud Migration Factory</h6>
+              </div>
+              <p style="font-size:11px;color:var(--t3);line-height:1.55;margin:0;">AWS & Azure Well-Architected assessments. Classify by Rehost, Replatform, or Refactor — execute with zero data loss.</p>
+            </div>
+          </div>
+          <div style="position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--br);min-height:220px;" class="rvr d2x">
+            <img src="hacker-girl-with-her-team-stealing-online-information-using-super-computers.webp" alt="Containers" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" />
+            <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(7,7,10,.9) 20%,rgba(7,7,10,.6) 100%);z-index:1;"></div>
+            <div style="position:relative;z-index:2;padding:22px;height:100%;display:flex;flex-direction:column;justify-content:flex-end;">
+              <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+                <div style="width:36px;height:36px;border-radius:9px;background:rgba(59,130,246,.15);border:1px solid rgba(59,130,246,.3);display:flex;align-items:center;justify-content:center;color:var(--g);font-size:16px;"><i class="bi bi-box-seam"></i></div>
+                <h6 style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:var(--t1);margin:0;">Container Orchestration</h6>
+              </div>
+              <p style="font-size:11px;color:var(--t3);line-height:1.55;margin:0;">EKS, AKS, or self-hosted Kubernetes with Helm, Istio service mesh, and GitOps via ArgoCD.</p>
+            </div>
+          </div>
+          <div style="position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--br);min-height:220px;" class="rvl d3x">
+            <img src="team-discussing-about-industrial-project-using-dual-monitors-setup-desing-d-gears-metalic-cla.jpg" alt="CI/CD Pipeline" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" />
+            <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(7,7,10,.9) 20%,rgba(7,7,10,.6) 100%);z-index:1;"></div>
+            <div style="position:relative;z-index:2;padding:22px;height:100%;display:flex;flex-direction:column;justify-content:flex-end;">
+              <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+                <div style="width:36px;height:36px;border-radius:9px;background:rgba(59,130,246,.15);border:1px solid rgba(59,130,246,.3);display:flex;align-items:center;justify-content:center;color:var(--g);font-size:16px;"><i class="bi bi-arrow-repeat"></i></div>
+                <h6 style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:var(--t1);margin:0;">CI/CD Pipeline Engineering</h6>
+              </div>
+              <p style="font-size:11px;color:var(--t3);line-height:1.55;margin:0;">GitHub Actions, GitLab CI, Jenkins — commit to production in under 15 minutes with full traceability.</p>
+            </div>
+          </div>
+          <div style="position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--br);min-height:220px;" class="rvr d4x">
+            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=85" alt="Monitoring" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0;" />
+            <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(7,7,10,.9) 20%,rgba(7,7,10,.6) 100%);z-index:1;"></div>
+            <div style="position:relative;z-index:2;padding:22px;height:100%;display:flex;flex-direction:column;justify-content:flex-end;">
+              <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px;">
+                <div style="width:36px;height:36px;border-radius:9px;background:rgba(59,130,246,.15);border:1px solid rgba(59,130,246,.3);display:flex;align-items:center;justify-content:center;color:var(--g);font-size:16px;"><i class="bi bi-activity"></i></div>
+                <h6 style="font-family:'Outfit',sans-serif;font-size:14px;font-weight:700;color:var(--t1);margin:0;">Managed Cloud Operations</h6>
+              </div>
+              <p style="font-size:11px;color:var(--t3);line-height:1.55;margin:0;">24/7 monitoring with Prometheus + Grafana. Automated alerting and monthly cost optimization — typically saves 20-35%.</p>
+            </div>
+          </div>
+        </div>
+        <div class="text-center rv" style="margin-top:18px;">
+          <a href="contact.html" class="btn-p">Plan Your Migration <i class="bi bi-arrow-right"></i></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ CYBERSECURITY — FULL-BLEED ═══════════ -->
+    <section id="security" class="full-hero" style="background:var(--d1);">
+      <div class="bg"><img src="hacker-girl-with-her-team-stealing-online-information-using-super-computers.webp" alt="Digital Security" /></div>
+      <div class="svc-num">03</div>
+      <div class="inner">
+        <div class="container" style="padding:100px 0;">
+          <div class="row g-4">
+            <div class="col-lg-7 rvl">
+              <div style="display:flex;flex-direction:column;gap:10px;">
+                <div class="feat-row d1x"><div class="fi"><i class="bi bi-bug"></i></div><div class="ft"><h6>Penetration Testing</h6><p>OWASP methodology — web apps, APIs, mobile & network. Manual + automated with CVSS scoring.</p></div></div>
+                <div class="feat-row d2x"><div class="fi"><i class="bi bi-radio-tower"></i></div><div class="ft"><h6>SOC-as-a-Service</h6><p>24/7 SOC with Splunk/Sentinel SIEM, CrowdStrike EDR, and dedicated L1-L3 analysts.</p></div></div>
+                <div class="feat-row d3x"><div class="fi"><i class="bi bi-file-earmark-check"></i></div><div class="ft"><h6>GCC Compliance</h6><p>Bahrain ISA, UAE NESA, Saudi NDMO, PDPL readiness — gap analysis to audit support.</p></div></div>
+                <div class="feat-row d4x"><div class="fi"><i class="bi bi-exclamation-triangle"></i></div><div class="ft"><h6>Incident Response</h6><p>1-hour SLA response. Forensic investigation, root cause analysis & containment playbooks.</p></div></div>
+              </div>
+            </div>
+            <div class="col-lg-5 rvr" style="display:flex;flex-direction:column;justify-content:center;">
+              <div class="tag">Service 03</div>
+              <h2 class="h2">Cybersecurity <span>Solutions</span></h2>
+              <p class="lead" style="max-width:380px;">Continuous discipline — not a checkbox. We monitor, hunt, and respond around the clock.</p>
+              <a href="contact.html" class="btn-p" style="margin-top:12px;">Secure Your Business <i class="bi bi-arrow-right"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ DATA & AI + MOBILE — DUAL CARDS ═══════════ -->
+    <section id="data" class="frm" style="background:var(--d2);min-height:auto;padding:80px 0;">
+      <div class="container" style="max-width:1060px;">
+        <div class="text-center mb-4 rv">
+          <div class="tag" style="justify-content:center">Services 04 & 05</div>
+          <h2 class="h2">Data Intelligence & <span>Mobile</span></h2>
+        </div>
+        <div class="row g-4">
+          <div class="col-lg-6 rvl">
+            <div style="background:var(--d3);border:1px solid var(--br);border-radius:14px;overflow:hidden;height:100%;display:flex;flex-direction:column;">
+              <div style="position:relative;height:24vh;min-height:170px;overflow:hidden;">
+                <img src="dashboard.avif" alt="Data Dashboard" style="width:100%;height:100%;object-fit:cover;" />
+                <div style="position:absolute;inset:0;background:linear-gradient(to top,var(--d3) 5%,transparent 60%);"></div>
+                <div style="position:absolute;top:14px;left:14px;background:rgba(59,130,246,.15);border:1px solid rgba(59,130,246,.3);backdrop-filter:blur(8px);border-radius:8px;padding:5px 12px;font-size:10px;font-weight:700;color:var(--g);letter-spacing:1px;text-transform:uppercase;">Service 04</div>
+              </div>
+              <div style="padding:18px 20px;flex:1;display:flex;flex-direction:column;">
+                <h5 style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:700;color:var(--t1);margin-bottom:4px;">Data & AI Analytics</h5>
+                <p style="font-size:11.5px;color:var(--t2);line-height:1.6;margin-bottom:12px;">Turn raw data into competitive advantage with the full data stack.</p>
+                <div style="display:flex;flex-direction:column;gap:6px;flex:1;">
+                  <div style="display:flex;align-items:center;gap:7px;font-size:11px;color:var(--t2);"><i class="bi bi-check-circle-fill" style="color:var(--g);font-size:13px;flex-shrink:0;"></i> BI dashboards — Power BI, Tableau, custom React</div>
+                  <div style="display:flex;align-items:center;gap:7px;font-size:11px;color:var(--t2);"><i class="bi bi-check-circle-fill" style="color:var(--g);font-size:13px;flex-shrink:0;"></i> ML pipelines — classification, forecasting, NLP</div>
+                  <div style="display:flex;align-items:center;gap:7px;font-size:11px;color:var(--t2);"><i class="bi bi-check-circle-fill" style="color:var(--g);font-size:13px;flex-shrink:0;"></i> Data lakes — AWS Glue, Databricks, Snowflake</div>
+                  <div style="display:flex;align-items:center;gap:7px;font-size:11px;color:var(--t2);"><i class="bi bi-check-circle-fill" style="color:var(--g);font-size:13px;flex-shrink:0;"></i> ETL orchestration — Airflow, dbt, Fivetran</div>
+                </div>
+                <a href="contact.html" class="btn-p" style="margin-top:14px;width:100%;justify-content:center;">Start with Data <i class="bi bi-arrow-right"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 rvr">
+            <div style="background:var(--d3);border:1px solid var(--br);border-radius:14px;overflow:hidden;height:100%;display:flex;flex-direction:column;">
+              <div style="position:relative;height:24vh;min-height:170px;overflow:hidden;">
+                <img src="adrien-Pvck4ScQH9E-unsplash.jpg" alt="Mobile Development" style="width:100%;height:100%;object-fit:cover;" />
+                <div style="position:absolute;inset:0;background:linear-gradient(to top,var(--d3) 5%,transparent 60%);"></div>
+                <div style="position:absolute;top:14px;left:14px;background:rgba(59,130,246,.15);border:1px solid rgba(59,130,246,.3);backdrop-filter:blur(8px);border-radius:8px;padding:5px 12px;font-size:10px;font-weight:700;color:var(--g);letter-spacing:1px;text-transform:uppercase;">Service 05</div>
+              </div>
+              <div style="padding:18px 20px;flex:1;display:flex;flex-direction:column;">
+                <h5 style="font-family:'Outfit',sans-serif;font-size:16px;font-weight:700;color:var(--t1);margin-bottom:4px;">Mobile App Development</h5>
+                <p style="font-size:11.5px;color:var(--t2);line-height:1.6;margin-bottom:12px;">One codebase, two platforms, native performance.</p>
+                <div style="display:flex;flex-direction:column;gap:6px;flex:1;">
+                  <div style="display:flex;align-items:center;gap:7px;font-size:11px;color:var(--t2);"><i class="bi bi-check-circle-fill" style="color:var(--g);font-size:13px;flex-shrink:0;"></i> Flutter & React Native — iOS + Android</div>
+                  <div style="display:flex;align-items:center;gap:7px;font-size:11px;color:var(--t2);"><i class="bi bi-check-circle-fill" style="color:var(--g);font-size:13px;flex-shrink:0;"></i> Native Swift/Kotlin for GPU or BLE apps</div>
+                  <div style="display:flex;align-items:center;gap:7px;font-size:11px;color:var(--t2);"><i class="bi bi-check-circle-fill" style="color:var(--g);font-size:13px;flex-shrink:0;"></i> Offline-first with SQLite sync & push</div>
+                  <div style="display:flex;align-items:center;gap:7px;font-size:11px;color:var(--t2);"><i class="bi bi-check-circle-fill" style="color:var(--g);font-size:13px;flex-shrink:0;"></i> Store publishing, ASO & OTA updates</div>
+                </div>
+                <a href="contact.html" class="btn-p" style="margin-top:14px;width:100%;justify-content:center;">Build Your App <i class="bi bi-arrow-right"></i></a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ IT CONSULTING — WITH IMAGE ═══════════ -->
+    <section id="consulting" class="frm" style="background:var(--d1);min-height:auto;padding:80px 0;">
+      <div class="container" style="max-width:1060px;">
+        <div class="text-center mb-4 rv">
+          <div class="tag" style="justify-content:center">Service 06</div>
+          <h2 class="h2">IT Strategy & <span>Consulting</span></h2>
+        </div>
+        <div class="consult-visual rv">
+          <div class="consult-img rvl">
+            <img src="group-young-business-people-working-office.webp" alt="Strategy Meeting" />
+            <div style="position:absolute;bottom:16px;left:16px;z-index:2;background:rgba(59,130,246,.15);border:1px solid rgba(59,130,246,.25);backdrop-filter:blur(10px);border-radius:10px;padding:8px 14px;display:flex;align-items:center;gap:8px;">
+              <i class="bi bi-lightbulb" style="color:var(--g);font-size:16px;"></i>
+              <span style="font-family:'Outfit',sans-serif;font-size:10px;font-weight:700;color:var(--t1);letter-spacing:1px;text-transform:uppercase;">Data-Driven Decisions</span>
+            </div>
+          </div>
+          <div class="rvr">
+            <div style="display:flex;flex-direction:column;gap:10px;">
+              <div class="feat-row d1x" style="flex-direction:column;gap:10px;padding:16px;">
+                <div style="display:flex;align-items:center;gap:10px;">
+                  <div class="fi"><i class="bi bi-map"></i></div>
+                  <h6 style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;color:var(--t1);margin:0;">Digital Transformation Roadmaps</h6>
+                </div>
+                <p style="font-size:11px;color:var(--t3);line-height:1.5;margin:0;">Phased plans aligned to KPIs and budget. 90-day quick wins that fund the 3-year vision.</p>
+              </div>
+              <div class="feat-row d2x" style="flex-direction:column;gap:10px;padding:16px;">
+                <div style="display:flex;align-items:center;gap:10px;">
+                  <div class="fi"><i class="bi bi-sliders2"></i></div>
+                  <h6 style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;color:var(--t1);margin:0;">Build vs. Buy Analysis</h6>
+                </div>
+                <p style="font-size:11px;color:var(--t3);line-height:1.5;margin:0;">Objective TCO modeling over 3-5 years. No vendor bias — just numbers.</p>
+              </div>
+              <div class="feat-row d3x" style="flex-direction:column;gap:10px;padding:16px;">
+                <div style="display:flex;align-items:center;gap:10px;">
+                  <div class="fi"><i class="bi bi-people-fill"></i></div>
+                  <h6 style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;color:var(--t1);margin:0;">CTO-as-a-Service</h6>
+                </div>
+                <p style="font-size:11px;color:var(--t3);line-height:1.5;margin:0;">Fractional CTO — weekly strategy sessions, architecture reviews & team mentoring.</p>
+              </div>
+              <div class="feat-row d4x" style="flex-direction:column;gap:10px;padding:16px;">
+                <div style="display:flex;align-items:center;gap:10px;">
+                  <div class="fi"><i class="bi bi-shield-fill-check"></i></div>
+                  <h6 style="font-family:'Outfit',sans-serif;font-size:13px;font-weight:700;color:var(--t1);margin:0;">IT Governance & Compliance</h6>
+                </div>
+                <p style="font-size:11px;color:var(--t3);line-height:1.5;margin:0;">COBIT, ITIL, ISO 27001, SOC 2 readiness — frameworks that scale with you.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="text-center rv" style="margin-top:18px;">
+          <a href="contact.html" class="btn-p">Book a Strategy Call <i class="bi bi-arrow-right"></i></a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ INDUSTRIES ═══════════ -->
+    <section class="frm" style="background:var(--d2);min-height:auto;padding:80px 0;">
+      <div class="container" style="max-width:1060px;">
+        <div class="text-center mb-4 rv">
+          <div class="tag" style="justify-content:center">Sector Expertise</div>
+          <h2 class="h2">Industries We <span>Serve</span></h2>
+        </div>
+        <div class="ind-grid rv">
+          <div class="ind-card d1x"><div class="ic-icon"><i class="bi bi-bank2"></i></div><h6>Banking & Finance</h6><p>Core banking, payments, AML/KYC</p></div>
+          <div class="ind-card d2x"><div class="ic-icon"><i class="bi bi-building-gear"></i></div><h6>Government</h6><p>e-Gov portals & digital identity</p></div>
+          <div class="ind-card d3x"><div class="ic-icon"><i class="bi bi-truck"></i></div><h6>Logistics</h6><p>TMS, WMS & fleet tracking</p></div>
+          <div class="ind-card d4x"><div class="ic-icon"><i class="bi bi-shop-window"></i></div><h6>Retail & E-Commerce</h6><p>OMS, POS & loyalty platforms</p></div>
+          <div class="ind-card d1x"><div class="ic-icon"><i class="bi bi-hospital"></i></div><h6>Healthcare</h6><p>Patient portals & telemedicine</p></div>
+          <div class="ind-card d2x"><div class="ic-icon"><i class="bi bi-droplet-half"></i></div><h6>Oil & Energy</h6><p>SCADA dashboards & IoT sensors</p></div>
+          <div class="ind-card d3x"><div class="ic-icon"><i class="bi bi-mortarboard-fill"></i></div><h6>Education</h6><p>LMS & student information systems</p></div>
+          <div class="ind-card d4x"><div class="ic-icon"><i class="bi bi-buildings"></i></div><h6>Real Estate</h6><p>Property CRM & smart building IoT</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ PROCESS — WITH IMAGE ═══════════ -->
+    <section class="frm" style="background:var(--d1);min-height:auto;padding:80px 0;">
+      <div class="container" style="max-width:1060px;">
+        <div class="text-center mb-4 rv">
+          <div class="tag" style="justify-content:center">How We Deliver</div>
+          <h2 class="h2">Our Engineering <span>Process</span></h2>
+        </div>
+        <div class="proc-visual rv">
+          <div class="proc-img-wrap rvl">
+            <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=800&q=85" alt="Team Working" />
+            <div class="proc-img-badge">
+              <i class="bi bi-rocket-takeoff"></i>
+              <span>5-Step Delivery</span>
+            </div>
+          </div>
+          <div class="proc-steps-v rvr">
+            <div class="proc-item d1x">
+              <div class="pi-num">01</div>
+              <div class="pi-icon"><i class="bi bi-search"></i></div>
+              <div class="pi-text"><h6>Discovery</h6><p>Stakeholder interviews & technical audit</p></div>
+            </div>
+            <div class="proc-item d2x">
+              <div class="pi-num">02</div>
+              <div class="pi-icon"><i class="bi bi-pencil-square"></i></div>
+              <div class="pi-text"><h6>Architecture</h6><p>System design, API contracts & infra planning</p></div>
+            </div>
+            <div class="proc-item d3x">
+              <div class="pi-num">03</div>
+              <div class="pi-icon"><i class="bi bi-code-slash"></i></div>
+              <div class="pi-text"><h6>Development</h6><p>Agile sprints, live demos & peer-reviewed code</p></div>
+            </div>
+            <div class="proc-item d4x">
+              <div class="pi-num">04</div>
+              <div class="pi-icon"><i class="bi bi-clipboard-check"></i></div>
+              <div class="pi-text"><h6>QA & Security</h6><p>SAST/DAST, pen-testing, UAT & load testing</p></div>
+            </div>
+            <div class="proc-item d5x">
+              <div class="pi-num">05</div>
+              <div class="pi-icon"><i class="bi bi-rocket-takeoff"></i></div>
+              <div class="pi-text"><h6>Launch & Support</h6><p>Blue-green deploy, monitoring & SLA support</p></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ CTA ═══════════ -->
+    <section class="frm" style="background:var(--d1);min-height:auto;padding:80px 0;">
+      <div class="container">
+        <div class="cta-box rv">
+          <div class="tag" style="justify-content:center">Ready to Start?</div>
+          <h2 class="cta-h">Ready to Innovate?<br/><span>Let's Talk.</span></h2>
+          <p class="cta-p">Connect with our experts to discuss how JSONTECH can help you achieve your business objectives through technology.</p>
+          <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+            <a href="mailto:info@jsontechs.com" class="btn-p">Get a Quote <i class="bi bi-arrow-right"></i></a>
+            <a href="tel:+973 33 546 555" class="btn-s"><i class="bi bi-telephone"></i> +973 33 546 555</a>
+          </div>
+          <p class="cta-note">Email us at <a href="mailto:info@jsontechs.com">info@jsontechs.com</a></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="container">
+        <div class="row g-5">
+          <div class="col-lg-4 col-md-6">
+            <a class="logo" href="index.html"><img src="logo2-removebg-preview (1).png" alt="" /></a>
+            <p class="f-desc">JSONTECH is a leading IT solutions provider based in Bahrain, committed to driving digital transformation and technological excellence for businesses across the GCC.</p>
+            <div class="fsoc">
+              <a href="#" class="fsl"><i class="bi bi-linkedin"></i></a>
+              <a href="#" class="fsl"><i class="bi bi-twitter-x"></i></a>
+              <a href="#" class="fsl"><i class="bi bi-instagram"></i></a>
+              <a href="#" class="fsl"><i class="bi bi-facebook"></i></a>
+            </div>
+          </div>
+          <div class="col-lg-2 col-md-6">
+            <div class="fh">Company</div>
+            <ul class="fl"><li><a href="about.html">About Us</a></li><li><a href="services.html">Services</a></li><li><a href="portfolio.html">Case Studies</a></li><li><a href="#">Careers</a></li><li><a href="#">Blog</a></li></ul>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="fh">Solutions</div>
+            <ul class="fl"><li><a href="#">Custom Software</a></li><li><a href="#">Cloud Services</a></li><li><a href="#">Cyber Security</a></li><li><a href="#">Data Analytics</a></li><li><a href="#">IT Consulting</a></li></ul>
+          </div>
+          <div class="col-lg-3 col-md-6">
+            <div class="fh">Contact</div>
+            <div class="fcr"><div class="fci"><i class="bi bi-geo-alt"></i></div><p>Manama, Kingdom of Bahrain</p></div>
+            <div class="fcr"><div class="fci"><i class="bi bi-envelope"></i></div><p><a href="mailto:info@jsontechs.com">info@jsontechs.com</a></p></div>
+            <div class="fcr"><div class="fci"><i class="bi bi-telephone"></i></div><p><a href="tel:+973 33 546 555">+973 33 546 555</a></p></div>
+          </div>
+        </div>
+        <div class="fbot">
+          <p>&copy; 2024 <span>JSONTECH</span>. All rights reserved.</p>
+          <p>Engineered for Excellence</p>
+        </div>
+      </div>
+    </footer>
+
+    <button id="btt" onclick="scrollTo({top:0,behavior:'smooth'})"><i class="bi bi-arrow-up"></i></button>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      const dot=document.getElementById("dot"),ring=document.getElementById("ring");
+      document.addEventListener("mousemove",e=>{dot.style.left=e.clientX+"px";dot.style.top=e.clientY+"px";ring.style.left=e.clientX+"px";ring.style.top=e.clientY+"px"});
+      document.querySelectorAll("a,button,.feat-row,.del-card,.stat-box,.ind-card,.proc-item,.tech-cat-card,.cta-box,.sdot,.proc-step").forEach(el=>{
+        el.addEventListener("mouseenter",()=>{dot.style.transform="translate(-50%,-50%) scale(2.2)";ring.style.opacity=".8"});
+        el.addEventListener("mouseleave",()=>{dot.style.transform="translate(-50%,-50%) scale(1)";ring.style.opacity=".4"})
+      });
+      const slides=document.querySelectorAll(".slide"),dots=document.querySelectorAll(".sdot");
+      let cur=0;const total=slides.length;
+      function goSlide(i){slides[cur].classList.remove("active");dots[cur].classList.remove("active");cur=i;slides[cur].classList.add("active");dots[cur].classList.add("active")}
+      dots.forEach(d=>d.addEventListener("click",()=>goSlide(+d.dataset.i)));
+      setInterval(()=>goSlide((cur+1)%total),5000);
+      const navEl=document.getElementById("nav");
+      window.addEventListener("scroll",()=>{navEl.classList.toggle("stuck",scrollY>55);document.getElementById("btt").classList.toggle("show",scrollY>380)});
+      const burg=document.getElementById("burg"),mobNav=document.getElementById("mobNav");
+      burg.onclick=()=>{burg.classList.toggle("open");mobNav.classList.toggle("open")};
+      mobNav.querySelectorAll("a").forEach(a=>(a.onclick=()=>{burg.classList.remove("open");mobNav.classList.remove("open")}));
+      const ro=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");ro.unobserve(e.target)}})},{threshold:.12});
+      document.querySelectorAll(".rv,.rvl,.rvr").forEach(el=>ro.observe(el));
+    </script>
+  </body>
+</html>
